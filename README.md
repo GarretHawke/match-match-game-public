@@ -1,2 +1,4 @@
-# match-match-game-public
-public repo for RSS task
+# ts-scss
+
+1. husky 4.3.7 - выше надо настраивать по другому - неудобно и вроде стало платным.
+2. svgo-all не работает надо пофиксить.
