@@ -1,0 +1,10 @@
+.game-field {
+  width: 1000px;
+  height: calc(100vh - 64px - 150px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 35px;
+  padding: 30px;
+  background-color: rgba(0, 0, 0, 0.05);
+}

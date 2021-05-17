@@ -1,6 +1,92 @@
 .header {
-  height: 80px;
+  height: 64px;
+  width: 100vw;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+  background-color: #2196f3;
+}
+
+.header-container {
+  max-width: 1440px;
+  width: 100vw;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 24px;
+}
+
+.logo {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 124%;
+  letter-spacing: 1.25px;
+  text-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+
+  &__top,
+  &__bottom {
+    width: 80px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__top {
+    color: #ffffff;
+  }
+
+  &__bottom {
+    color: #2196f3;
+    background-color: #ffffff;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  }
+}
+
+.navigation {
+  height: 100%;
+  display: flex;
+  cursor: pointer;
+
+
+
+  &__about,
+  &__score,
+  &__settings {
+    width: 96px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.navigation-icon {
+  height: 20px;
+  width: 20px;
+}
+
+.navigation-text {
+  font-size: 12px;
+  line-height: 124%;
+  letter-spacing: 0.4px;
+  color: rgba(255, 255, 255, 1);
+
+  &:hover {
+    color: rgba(255, 255, 255, 0.7);
+  }
+}
+
+.profile {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 1);
+  cursor: pointer;
 }

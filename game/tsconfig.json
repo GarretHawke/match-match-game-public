@@ -15,5 +15,6 @@
     "rootDir": "./",
     "module": "CommonJS",
     "target": "ES6",
-  }
+  },
+  "include": ["src", "declarations.d.ts"]
 }
