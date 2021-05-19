@@ -6,6 +6,7 @@ export class StartButton {
 
   getButton(): HTMLElement {
     this.button = createDomNode(this.button, 'button', styles['start-button']);
+    this.button.id = 'start-button';
     this.button.innerText = 'stop game';
 
     return this.button;

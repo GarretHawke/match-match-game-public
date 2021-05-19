@@ -1,45 +1,40 @@
-import { createDomNode } from '@/common';
-import styles from './card.scss';
+import './card.scss';
+// import { createDomNode } from '@/common';
+import { BaseComponent } from '@/common/base-component';
 
-export default class Card {
+const FLIP_CLASS = 'flipped';
+
+export class Card extends BaseComponent {
   isFlipped = false;
 
-  cardContainer: HTMLElement;
-  card: HTMLElement;
-  cardFront: HTMLElement;
-  cardBack: HTMLElement;
+  constructor(readonly image: string) {
+    super('div', ['card-container']);
 
-  getCard(): HTMLElement {
-    this.cardContainer = createDomNode(this.cardContainer, 'div', styles['card-container']);
-    this.card = createDomNode(this.card, 'div', styles['card']);
-    this.cardContainer.append(this.card);
-    this.cardFront = createDomNode(this.cardFront, 'div', styles['card__front']);
-    this.cardBack = createDomNode(this.cardBack, 'div', styles['card__back']);
-    this.card.append(this.cardFront, this.cardBack);
-
-    /* this.cardContainer.addEventListener('mouseover', () => {
-      this.cardContainer.classList.add('flipped');
-    });
-
-    this.cardContainer.addEventListener('mouseleave', () => {
-      this.cardContainer.classList.remove('flipped');
-    }); */
-
-    return this.cardContainer;
+    this.element.innerHTML = `
+      <div class="card">
+        <div class="card__front" style="background-image: url('./images/${image}')"></div>
+        <div class="card__back"></div>
+      </div>
+    `;
   }
 
-  flip(isFront = false): void {
-    this.cardContainer.classList.toggle('flipped', isFront);
-  }
-
-  flipToBack(): void {
+  flipToBack(): Promise<void> {
     this.isFlipped = true;
     return this.flip(true);
   }
 
-  flipToFront(): void {
+  flipToFront(): Promise<void> {
     this.isFlipped = false;
-    return this.flip(false);
+    return this.flip();
+  }
+
+  private flip(isFront = false): Promise<void> {
+    return new Promise((resolve) => {
+      this.element.classList.toggle(FLIP_CLASS, isFront);
+      this.element.addEventListener('transitionend', () => resolve(), {
+        once: true,
+      });
+    });
   }
 }
 

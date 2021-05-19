@@ -40,12 +40,10 @@
   &__front {
     background-position: center;
     background-size: cover;
-    background-color: cornflowerblue;
   }
 
   &__back {
-    // background-image: url('../../../static/images/card.png');
-    background-color: chocolate;
+    background-image: url('./images/card.png');
     background-position: center;
     background-size: cover;
     transform: rotateY(180deg);

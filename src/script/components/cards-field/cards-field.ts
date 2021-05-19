@@ -1,29 +1,26 @@
-import { createDomNode } from '@/common';
-import Card from '../card';
-import styles from './cards-field.scss';
+import './cards-field.scss';
+// import { createDomNode } from '@/common';
+import { BaseComponent } from '@/common/base-component';
+import { Card }  from '../card';
 
-const SHOW_TIME = 5000;
+const SHOW_TIME = 15000;
 
-export default class CardsField {
-  cardsField: HTMLElement;
-  cards: Card[] = [];
+export class CardsField extends BaseComponent {
+  private cards: Card[] = [];
 
-  getCardsField(): HTMLElement {
-    this.cardsField = createDomNode(this.cardsField, 'div', styles['cards-field']);
-    //this.cardsField.append(new Card().getCard());
-
-    return this.cardsField;
+  constructor() {
+    super('div', ['cards-field']);
   }
 
-  clearCardsField(): void {
+  clear(): void {
     this.cards = [];
-    this.cardsField.innerHTML = '';
+    this.element.innerHTML = '';
   }
 
-  addCardsToField(cards: Card[]): void {
+  addCards(cards: Card[]): void {
     this.cards = cards;
     this.cards.forEach((card) => {
-      this.cardsField.append(card.getCard());
+      this.element.appendChild(card.element);
     });
     setTimeout(() => {
       this.cards.forEach((card) => card.flipToBack());

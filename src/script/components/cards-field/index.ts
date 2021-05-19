@@ -1,3 +1,3 @@
-import CardsField from './cards-field';
+import { CardsField } from './cards-field';
 
-export default CardsField;
+export { CardsField };

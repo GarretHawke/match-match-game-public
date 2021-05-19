@@ -50,7 +50,7 @@ const config: Configuration = {
   mode: isProduction ? 'production' : 'development',
   devtool: isProduction ? false : 'source-map',
   target: isProduction ? 'browserslist' : 'web',
-  entry: './src/index.ts',
+  entry: ['regenerator-runtime/runtime', './src/index.ts'],
   output: {
     path: resolve(__dirname, 'build'),
     publicPath: '/',
