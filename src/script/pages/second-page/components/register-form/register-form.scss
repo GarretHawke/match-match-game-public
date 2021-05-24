@@ -10,13 +10,15 @@
   position: fixed;
   z-index: 100;
 
+
   &-container {
     width: max-content;
     height: max-content;
+    display: none;
 
-    &.hidden {
+    /* &.hidden {
       display: none;
-    }
+    } */
   }
 }
 

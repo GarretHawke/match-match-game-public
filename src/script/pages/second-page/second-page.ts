@@ -34,17 +34,14 @@ export default class SecondPage {
     this.secondPage.append(this.main.getMain());
     this.secondPage.append(this.registerForm.getRegisterForm());
 
+    const registerButton = document.getElementById('start-button');
+    registerButton?.addEventListener('click', () => {
+      console.log('button works!');
+      this.registerForm.revealRegisterForm();
+    });
+
     rootDiv.append(this.secondPage);
   }
-
- /*  clickHandler(): void {
-    this.navigate('/settings');
-  }
-
-  navigate(pathName: string): void {
-    changeUrl(pathName);
-    this.routing();
-  } */
 }
 
 

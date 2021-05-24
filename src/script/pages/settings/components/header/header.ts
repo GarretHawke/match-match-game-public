@@ -21,7 +21,7 @@ export default class Header {
   navTextSettings: HTMLElement;
   profile: HTMLElement;
   registerForm: HTMLElement;
-  startButton: StartButton;
+  startButton: HTMLElement;
 
   headerLeft: HTMLElement;
   headerRight: HTMLElement;
@@ -68,11 +68,14 @@ export default class Header {
 
     this.nav.append(this.navAbout, this.navScore, this.navSettings);
 
-    this.startButton = new StartButton();
+    // this.startButton = new StartButton();
+
+    this.startButton = customButton('Settings', this.clickHandlerStart.bind(this), styles['start-button']);
+    this.startButton.innerText = 'start game';
     this.profile = createDomNode(this.profile, 'div', styles['profile']);
 
     this.headerLeft.append(this.logo, this.nav);
-    this.headerRight.append(this.startButton.getButton(), this.profile);
+    this.headerRight.append(this.startButton, this.profile);
     this.headerContainer.append(this.headerLeft, this.headerRight);
   }
 
@@ -91,6 +94,10 @@ export default class Header {
 
   clickHandlerSettings(): void {
     this.navigate('/settings');
+  }
+
+  clickHandlerStart(): void {
+    this.navigate('/game');
   }
 
   navigate(pathName: string): void {
