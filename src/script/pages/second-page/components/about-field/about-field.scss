@@ -1,3 +1,5 @@
+
+
 .about-field {
   width: 1000px;
   height: calc(100vh - 64px - 150px);
@@ -98,7 +100,7 @@
   max-height: 230px;
   display: flex;
   //background-color: #ffffff;
-  background-image: url('images/registr-form.png');
+  background-image: url('../../../.././../static/images/registr-form.png');
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
@@ -111,7 +113,7 @@
   max-height: 135px;
   display: flex;
   // background-color: #ffffff;
-  background-image: url('images/settings-button.png');
+  background-image: url('../../../.././../static/images/settings-button.png');
   background-position: center;
   background-size: auto;
   background-repeat: no-repeat;
@@ -124,7 +126,7 @@
   max-height: 230px;
   display: flex;
   //background-color: #ffffff;
-  background-image: url('images/game-field.png');
+  background-image: url('../../../.././../static/images/game-field.png');
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
