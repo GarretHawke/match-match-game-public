@@ -11,14 +11,17 @@ export default class SettingsPage {
 
   public settingsPage: HTMLElement;
 
+  constructor() {
+    this.header = new Header();
+  }
+
   initPage(root: HTMLElement, routing: () => void): void {
     this.routing = routing;
     const rootDiv = root;
     rootDiv.innerHTML = '';
+    rootDiv.append(this.header.getHeader(routing));
 
     this.settingsPage = createDomNode(this.settingsPage, 'div', styles['settings-page']);
-    this.header = new Header();
-    this.settingsPage.append(this.header.getHeader());
 
     this.main = new Main();
     this.settingsPage.append(this.main.getMain());
@@ -26,12 +29,12 @@ export default class SettingsPage {
     rootDiv.append(this.settingsPage);
   }
 
-  clickHandler(): void {
+  /* clickHandler(): void {
     this.navigate('/');
   }
 
   navigate(pathName: string): void {
     changeUrl(pathName);
     this.routing();
-  }
+  } */
 }

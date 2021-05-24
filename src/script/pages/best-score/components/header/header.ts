@@ -1,5 +1,6 @@
-import { createDomNode } from "@/common";
+import { changeUrl, createDomNode } from "@/common";
 import { customButton } from "@/components";
+import { StartButton } from "@/components/button/start-button";
 import styles from './header.scss';
 
 export default class Header {
@@ -20,6 +21,7 @@ export default class Header {
   navTextSettings: HTMLElement;
   profile: HTMLElement;
   registerForm: HTMLElement;
+  startButton: StartButton;
 
   private routing: () => void;
 
@@ -37,9 +39,9 @@ export default class Header {
     this.logo.append(this.logoTop, this.logoBottom);
 
     this.nav = createDomNode(this.nav, 'nav', styles['navigation']);
-    this.navAbout = createDomNode(this.navAbout, 'div', styles['navigation__about']);
-    this.navScore = createDomNode(this.navScore, 'div', styles['navigation__score']);
-    this.navSettings = createDomNode(this.navSettings, 'div', styles['navigation__settings']);
+    this.navAbout = customButton('About', this.clickHandlerAbout.bind(this), styles['navigation__about']);
+    this.navScore = customButton('Score', this.clickHandlerScore.bind(this), styles['navigation__score']);
+    this.navSettings = customButton('Settings', this.clickHandlerSettings.bind(this), styles['navigation__settings']);
 
     this.iconAbout = createDomNode(this.iconAbout, 'div', styles['navigation-icon__about']);
     this.iconScore = createDomNode(this.iconScore, 'div', styles['navigation-icon__score']);
@@ -56,68 +58,33 @@ export default class Header {
     this.navAbout.append(this.iconAbout, this.navTextAbout);
     this.navScore.append(this.iconScore, this.navTextScore);
     this.navSettings.append(this.iconSettings, this.navTextSettings);
-
-    // this.icon = createDomNode(this.icon, 'img', styles['navigation-icon']);
     this.nav.append(this.navAbout, this.navScore, this.navSettings);
 
-    /* this.startButton = new StartButton();
-    this.startButton.listener();
-    this.headerContainer.append(this.startButton.getButton()); */
-    // this.headerContainer.append(new StartButton().getButton());
-
-    const startButton = customButton('start-button', this.clickHandler.bind(this), styles['start-button']);
-    startButton.id = 'start-button';
-    startButton.innerText = 'start game';
-
+    this.startButton = new StartButton();
 
     this.profile = createDomNode(this.profile, 'div', styles['profile']);
-    this.headerContainer.append(this.logo, this.nav, startButton, this.profile);
-
-    // this.registerForm = new RegisterForm().getRegisterForm();
-    // this.headerContainer.append(this.registerForm);
-
-    /* const routingButton = customButton('Main Page', this.clickHandler.bind(this), styles['routing-button']);
-    this.navAbout.append(routingButton); */
+    this.headerContainer.append(this.logo, this.nav, this.startButton.getButton(), this.profile);
   }
 
-  clickHandler(): void {
-    console.log('fff');
+  getHeader(routing: () => void): HTMLElement {
+    this.routing = routing;
+    return this.header;
   }
 
-  /* clickHandler(): void {
-    this.navigate('/second-page');
+  clickHandlerAbout(): void {
+    this.navigate('/');
+  }
+
+  clickHandlerScore(): void {
+    this.navigate('/best-score');
+  }
+
+  clickHandlerSettings(): void {
+    this.navigate('/settings');
   }
 
   navigate(pathName: string): void {
     changeUrl(pathName);
     this.routing();
-  } */
-
-
-  getHeader(): HTMLElement {
-    //this.bindEvents();
-    return this.header;
   }
-
-
-
-  /* bindEvents(): void {
-    this.header.addEventListener('click', (event) => this.handlerClick(event));
-  }
-
-  handlerClick(event: MouseEvent): void {
-    if (Header.isClickOnMenu(event)) {
-      this.clickOnMenu();
-    }
-  }
-
-  static isClickOnMenu(event: MouseEvent): boolean {
-    const target = event.target as Element;
-    return target.classList.contains('header');
-  }
-
-  clickOnMenu(): void {
-    // eslint-disable no-console
-    console.log('click', this.header);
-  } */
 }

@@ -23,7 +23,8 @@ export default class Header {
 
   private routing: () => void;
 
-  getHeader(): HTMLElement {
+  getHeader(routing: () => void): HTMLElement {
+    this.routing = routing;
     this.header = createDomNode(this.header, 'header', styles['header']);
     this.headerContainer = createDomNode(this.headerContainer, 'div', styles['header-container']);
     this.header.append(this.headerContainer);
@@ -38,9 +39,12 @@ export default class Header {
     this.headerContainer.append(this.logo);
 
     this.nav = createDomNode(this.nav, 'nav', styles['navigation']);
-    this.navAbout = createDomNode(this.navAbout, 'div', styles['navigation__about']);
-    this.navScore = createDomNode(this.navScore, 'div', styles['navigation__score']);
-    this.navSettings = createDomNode(this.navSettings, 'div', styles['navigation__settings']);
+    //this.navAbout = createDomNode(this.navAbout, 'button', styles['navigation__about']);
+    this.navAbout = customButton('About', this.clickHandlerAbout.bind(this), styles['navigation__about']);
+    //this.navScore = createDomNode(this.navScore, 'div', styles['navigation__score']);
+    this.navScore = customButton('Score', this.clickHandlerScore.bind(this), styles['navigation__score']);
+    //this.navSettings = createDomNode(this.navSettings, 'div', styles['navigation__settings']);
+    this.navSettings = customButton('Settings', this.clickHandlerSettings.bind(this), styles['navigation__settings']);
 
     this.iconAbout = createDomNode(this.iconAbout, 'div', styles['navigation-icon__about']);
     this.iconScore = createDomNode(this.iconScore, 'div', styles['navigation-icon__score']);
@@ -57,9 +61,8 @@ export default class Header {
     this.navAbout.append(this.iconAbout, this.navTextAbout);
     this.navScore.append(this.iconScore, this.navTextScore);
     this.navSettings.append(this.iconSettings, this.navTextSettings);
-    const buttonSettings = customButton('Settings', this.clickHandler.bind(this), styles['settings-button']);
-    this.navSettings.append(buttonSettings);
-    // this.icon = createDomNode(this.icon, 'img', styles['navigation-icon']);
+
+
     this.nav.append(this.navAbout, this.navScore, this.navSettings);
     this.headerContainer.append(this.nav);
 
@@ -72,7 +75,15 @@ export default class Header {
     return this.header;
   }
 
-  clickHandler(): void {
+  clickHandlerAbout(): void {
+    this.navigate('/');
+  }
+
+  clickHandlerScore(): void {
+    this.navigate('/best-score');
+  }
+
+  clickHandlerSettings(): void {
     this.navigate('/settings');
   }
 

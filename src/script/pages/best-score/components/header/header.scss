@@ -63,6 +63,10 @@
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
+    outline: none;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
   }
 
   &__about:hover {

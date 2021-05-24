@@ -1,6 +1,4 @@
-import { MainPage, SecondPage } from '@/pages';
-import BestScorePage from '@/pages/best-score/best-score';
-import SettingsPage from '@/pages/settings';
+import { MainPage, SecondPage, SettingsPage, BestScorePage } from '@/pages';
 
 export default class App {
   mainPage: MainPage;
