@@ -1,0 +1,33 @@
+.settings-field {
+  width: 1000px;
+  height: 250px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 35px;
+  padding: 0 50px 30px 50px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.header {
+  font-size: 20px;
+  line-height: 128%;
+  font-weight: 500;
+  margin-top: 30px;
+}
+
+.select {
+  height: 50px;
+  width: 256px;
+  font-size: 14px;
+  line-height: 128%;
+  color: rgba(0, 0, 0, 0.6);
+  outline: none;
+  border: none;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.option {
+  border: none;
+}

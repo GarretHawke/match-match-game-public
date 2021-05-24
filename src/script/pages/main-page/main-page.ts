@@ -6,7 +6,8 @@ import Main from '@/components/main';
 import styles from '@/pages/main-page/main-page.scss';
 
 export default class MainPage {
-  //public header: Header;
+  header: Header;
+  main: Main;
   //public card: Card;
 
   private routing: () => void;
@@ -21,21 +22,22 @@ export default class MainPage {
     this.routing = routing;
     const rootDiv = root;
     rootDiv.innerHTML = '';
-    //rootDiv.prepend(this.header.getHeader());
 
     this.mainPage = createDomNode(this.mainPage, 'div', styles['main-page']);
 
-    //this.mainPage.append(customButton('Second Page', this.clickHandler.bind(this)));
-    this.mainPage.append(new Header().getHeader());
-    // this.mainPage.append(new Card().getCard());
-    this.mainPage.append(new Main().getMain());
+    this.header = new Header();
+    this.mainPage.append(this.header.getHeader());
+    this.main = new Main();
+    this.mainPage.append(this.main.getMain());
+    /* const buttonSettings = customButton('Settings', this.clickHandler.bind(this), styles['settings-button']);
+    this.mainPage.append(buttonSettings); */
 
 
     rootDiv.append(this.mainPage);
   }
 
   clickHandler(): void {
-    this.navigate('/second-page');
+    this.navigate('/');
   }
 
   navigate(pathName: string): void {

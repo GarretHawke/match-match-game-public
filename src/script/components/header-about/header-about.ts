@@ -1,7 +1,6 @@
-import { changeUrl, createDomNode } from '@/common';
-import styles from '@/components/header/header.scss';
+import { createDomNode } from '@/common';
+import styles from '@/components/header/header-about.scss';
 import { StartButton } from '../button/start-button';
-import customButton from '@/components/button';
 
 export default class Header {
   header: HTMLElement;
@@ -21,7 +20,6 @@ export default class Header {
   navTextSettings: HTMLElement;
   profile: HTMLElement;
 
-  private routing: () => void;
 
   getHeader(): HTMLElement {
     this.header = createDomNode(this.header, 'header', styles['header']);
@@ -29,6 +27,7 @@ export default class Header {
     this.header.append(this.headerContainer);
 
     this.logo = createDomNode(this.logo, 'div', styles['logo']);
+
 
     this.logoTop = createDomNode(this.logoTop, 'div', styles['logo__top']);
     this.logoTop.innerHTML = 'MATCH';
@@ -52,13 +51,12 @@ export default class Header {
 
     this.navTextAbout.innerHTML = 'About Game';
     this.navTextScore.innerHTML = 'Best Score';
-    this.navTextSettings.innerHTML = 'Game Settings';
+    this.navTextSettings.innerHTML = 'Settings';
 
     this.navAbout.append(this.iconAbout, this.navTextAbout);
     this.navScore.append(this.iconScore, this.navTextScore);
     this.navSettings.append(this.iconSettings, this.navTextSettings);
-    const buttonSettings = customButton('Settings', this.clickHandler.bind(this), styles['settings-button']);
-    this.navSettings.append(buttonSettings);
+
     // this.icon = createDomNode(this.icon, 'img', styles['navigation-icon']);
     this.nav.append(this.navAbout, this.navScore, this.navSettings);
     this.headerContainer.append(this.nav);
@@ -70,15 +68,6 @@ export default class Header {
 
     //this.bindEvents();
     return this.header;
-  }
-
-  clickHandler(): void {
-    this.navigate('/settings');
-  }
-
-  navigate(pathName: string): void {
-    changeUrl(pathName);
-    this.routing();
   }
 
   /* bindEvents(): void {

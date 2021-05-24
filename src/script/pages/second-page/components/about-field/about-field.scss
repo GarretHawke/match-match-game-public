@@ -1,0 +1,132 @@
+.about-field {
+  width: 1000px;
+  height: calc(100vh - 64px - 150px);
+  max-height: 1000px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 35px;
+  padding: 30px 50px;
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.about-header {
+  font-size: 20px;
+  line-height: 128%;
+  align-self: flex-start;
+  letter-spacing: 0.15px;
+  color: rgba(0, 0, 0, 0.87);
+  font-weight: 400;
+}
+
+.about-container {
+  width: 100%;
+  height: 645px;
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.steps-container {
+  &-left,
+  &-right {
+    height: 100%;
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+}
+
+.step-container {
+  &-one {
+    width: 100%;
+    height: 35%;
+    max-height: 230px;
+    padding: 16px;
+    display: flex;
+    background-color: #ffffff;
+  }
+
+  &-two {
+    width: 100%;
+    height: 20%;
+    max-height: 135px;
+    padding: 16px;
+    display: flex;
+    background-color: #ffffff;
+  }
+
+  &-three {
+    width: 100%;
+    height: 35%;
+    max-height: 230px;
+    padding: 16px;
+    display: flex;
+    background-color: #ffffff;
+  }
+}
+
+.circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #2196f3;
+  font-size: 24px;
+  color: #ffffff;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  cursor: default;
+}
+
+.step-text {
+  display: block;
+  width: 270px;
+  margin-left: 16px;
+  font-size: 14px;
+  line-height: 122%;
+  letter-spacing: 0.25px;
+  color: rgba(0, 0, 0, 0.6);
+  cursor: default;
+}
+
+.form-container {
+  width: 100%;
+  height: 35%;
+  max-height: 230px;
+  display: flex;
+  //background-color: #ffffff;
+  background-image: url('./images/registr-form.png');
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  // cursor: pointer;
+}
+
+.button-container {
+  width: 100%;
+  height: 20%;
+  max-height: 135px;
+  display: flex;
+  // background-color: #ffffff;
+  background-image: url('./images/settings-button.png');
+  background-position: center;
+  background-size: auto;
+  background-repeat: no-repeat;
+  // cursor: pointer;
+}
+
+.game-field-container {
+  width: 100%;
+  height: 35%;
+  max-height: 230px;
+  display: flex;
+  //background-color: #ffffff;
+  background-image: url('./images/game-field.png');
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  // cursor: pointer;
+}

@@ -57,7 +57,6 @@
   &__about,
   &__score,
   &__settings {
-    position: relative;
     width: 96px;
     padding: 10px 0;
     display: flex;
@@ -66,8 +65,9 @@
     justify-content: space-around;
   }
 
-  &__about:hover {
-    background-color: #1e33a9;
+  &__about {
+    background-color: #1e88e5;
+    cursor: default;
   }
 
   &__score:hover {
@@ -77,8 +77,6 @@
   &__settings:hover {
     background-color: #1e33a9;
   }
-
-
 }
 
 .navigation-icon {
@@ -126,12 +124,27 @@
   cursor: pointer;
 }
 
-.settings-button {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  outline: none;
+.start-button {
+  height: 36px;
+  padding: 0 16px;
+  border-radius: 4px;
+  // margin-left: 680px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 114%;
+  letter-spacing: 1.25px;
+  text-transform: uppercase;
+  color: rgba(33, 150, 243, 1);
+  background-color: #F2F9FE;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
   border: none;
+  outline: none;
   cursor: pointer;
-  background-color: transparent;
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.7);
+  }
 }

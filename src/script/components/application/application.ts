@@ -1,5 +1,6 @@
 import { ImageCategoryModel } from '@/models/image-category-model';
 import { Game } from '../game/game';
+import '../cards-field/cards-field.scss';
 
 export class Application {
   private readonly game: Game;

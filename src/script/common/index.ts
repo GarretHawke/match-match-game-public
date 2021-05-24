@@ -1,3 +1,3 @@
-import { createDomNode, changeUrl } from '@/common/common';
+import { createDomNode, changeUrl, addStyles } from '@/common/common';
 
-export { createDomNode, changeUrl };
+export { createDomNode, changeUrl , addStyles };
