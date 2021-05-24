@@ -23,12 +23,18 @@ export default class Header {
   registerForm: HTMLElement;
   startButton: StartButton;
 
+  headerLeft: HTMLElement;
+  headerRight: HTMLElement;
+
   private routing: () => void;
 
   constructor() {
     this.header = createDomNode(this.header, 'header', styles['header']);
     this.headerContainer = createDomNode(this.headerContainer, 'div', styles['header-container']);
     this.header.append(this.headerContainer);
+
+    this.headerLeft = createDomNode(this.headerLeft, 'div', styles['header-left']);
+    this.headerRight = createDomNode(this.headerRight, 'div', styles['header-right']);
 
     this.logo = createDomNode(this.logo, 'div', styles['logo']);
 
@@ -63,9 +69,11 @@ export default class Header {
     this.nav.append(this.navAbout, this.navScore, this.navSettings);
 
     this.startButton = new StartButton();
-
     this.profile = createDomNode(this.profile, 'div', styles['profile']);
-    this.headerContainer.append(this.logo, this.nav, this.startButton.getButton(), this.profile);
+
+    this.headerLeft.append(this.logo, this.nav);
+    this.headerRight.append(this.startButton.getButton(), this.profile);
+    this.headerContainer.append(this.headerLeft, this.headerRight);
   }
 
   getHeader(routing: () => void): HTMLElement {

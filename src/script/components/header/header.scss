@@ -17,6 +17,14 @@
   padding: 0 24px;
 }
 
+.header-left,
+.header-right {
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .logo {
   height: 100%;
   display: flex;
@@ -53,6 +61,7 @@
   height: 100%;
   display: flex;
   cursor: pointer;
+  margin-left: 150px;
 
   &__about,
   &__score,
@@ -63,7 +72,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
     background-color: transparent;
     border: none;
     cursor: pointer;
@@ -81,8 +90,6 @@
   &__settings:hover {
     background-color: #1e33a9;
   }
-
-
 }
 
 .navigation-icon {
@@ -128,14 +135,4 @@
   background-position: center;
   background-size: contain;
   cursor: pointer;
-}
-
-.settings-button {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  outline: none;
-  border: none;
-  cursor: pointer;
-  background-color: transparent;
 }

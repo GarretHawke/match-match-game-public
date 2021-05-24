@@ -17,6 +17,14 @@
   padding: 0 24px;
 }
 
+.header-left,
+.header-right {
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .logo {
   height: 100%;
   display: flex;
@@ -53,6 +61,7 @@
   height: 100%;
   display: flex;
   cursor: pointer;
+  margin-left: 150px;
 
   &__about,
   &__score,
@@ -62,7 +71,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
     outline: none;
     border: none;
     background-color: transparent;
@@ -126,29 +135,4 @@
   background-position: center;
   background-size: contain;
   cursor: pointer;
-}
-
-.start-button {
-  height: 36px;
-  padding: 0 16px;
-  border-radius: 4px;
-  // margin-left: 680px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 114%;
-  letter-spacing: 1.25px;
-  text-transform: uppercase;
-  color: rgba(33, 150, 243, 1);
-  background-color: #F2F9FE;
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
-  border: none;
-  outline: none;
-  cursor: pointer;
-
-  &:hover {
-    background-color: rgba(255, 255, 255, 0.7);
-  }
 }
