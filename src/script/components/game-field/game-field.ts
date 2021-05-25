@@ -26,12 +26,7 @@ export class GameField {
       console.log('success');
 
       new Application(appElement).start();
-    }, 1000);
-
-   /*  window.onload = () => {
-
-    } */
-    //this.gameField.append(new CardsField().getCardsField());
+    }, 1);
 
     return this.gameField;
   }

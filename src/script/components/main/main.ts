@@ -6,15 +6,18 @@ import { GameField } from '../game-field';
 export default class Main {
   main: HTMLElement;
   mainContainer: HTMLElement;
+  gameField: GameField;
 
   getMain(): HTMLElement {
     this.main = createDomNode(this.main, 'main', styles['main']);
     this.mainContainer = createDomNode(this.mainContainer, 'div', styles['main-container']);
-    this.mainContainer.append(new GameField().getGameField());
 
+    this.gameField = new GameField();
+
+    this.mainContainer.append(this.gameField.getGameField());
     this.main.append(this.mainContainer);
 
-    window.onload = () => {
+   /*  window.onload = () => {
       const appElement = document.getElementById('app');
 
       if (!appElement) {
@@ -23,7 +26,7 @@ export default class Main {
       console.log('success');
 
       new Application(appElement).start();
-    }
+    } */
 
     return this.main;
   }

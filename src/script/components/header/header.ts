@@ -69,6 +69,7 @@ export default class Header {
 
     //this.startButton = new StartButton();
     this.startButton = customButton('Stop', this.clickHandlerStart.bind(this), styles['start-button']);
+    this.startButton.id = 'stop-button';
     this.startButton.innerText = 'stop game';
 
     this.profile = createDomNode(this.profile, 'div', styles['profile']);
@@ -93,6 +94,12 @@ export default class Header {
   }
 
   clickHandlerStart(): void {
+    if (this.startButton.innerText == 'STOP GAME') {
+      this.startButton.innerText = 'RESUME GAME';
+    } else {
+      this.startButton.innerText = 'STOP GAME';
+    }
+
     console.log('stop game!');
   }
 

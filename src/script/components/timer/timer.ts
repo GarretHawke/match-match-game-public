@@ -22,7 +22,33 @@ export default class Timer {
       }, 10);
     }
 
-    this.timer.addEventListener('click', () => {
+    const stopButton = document.getElementById('stop-button');
+    /* stopButton?.addEventListener('click', () => {
+      this.timer.classList.remove('active');
+        clearInterval(stopWatch);
+    });
+
+    setTimeout(() => {
+      this.timer.classList.add('active');
+      startWatch();
+    }, 5000); */
+
+    /* this.timer.addEventListener('click', () => {
+      if (this.timer.classList.contains('active')) {
+        this.timer.classList.remove('active');
+        clearInterval(stopWatch);
+      } else {
+        this.timer.classList.add('active');
+        startWatch();
+      }
+    }); */
+
+    setTimeout(() => {
+      this.timer.classList.add('active');
+      startWatch();
+    }, 5000);
+
+    stopButton?.addEventListener('click', () => {
       if (this.timer.classList.contains('active')) {
         this.timer.classList.remove('active');
         clearInterval(stopWatch);

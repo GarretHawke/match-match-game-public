@@ -24,33 +24,10 @@ export default class MainPage {
     rootDiv.innerHTML = '';
     rootDiv.append(this.header.getHeader(routing));
 
-    /* const buttonAbout = document.getElementById('about');
-    buttonAbout?.addEventListener('click', () => {
-      console.log('about');
-      this.clickHandler.bind(this);
-    }); */
-
     this.mainPage = createDomNode(this.mainPage, 'div', styles['main-page']);
-
-    // buttonAbout?.append(customButton('Main Page', this.clickHandler.bind(this)));
-
-    // this.header = new Header();
-    // this.mainPage.append(this.header.getHeader());
     this.main = new Main();
     this.mainPage.append(this.main.getMain());
-    /* const buttonSettings = customButton('Settings', this.clickHandler.bind(this), styles['settings-button']);
-    this.mainPage.append(buttonSettings); */
-
 
     rootDiv.append(this.mainPage);
   }
-
- /*  clickHandler(): void {
-    this.navigate('/settings');
-  }
-
-  navigate(pathName: string): void {
-    changeUrl(pathName);
-    this.routing();
-  } */
 }

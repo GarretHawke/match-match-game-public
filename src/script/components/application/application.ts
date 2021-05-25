@@ -7,7 +7,9 @@ export class Application {
 
   constructor(private readonly rootElement: HTMLElement) {
     this.game = new Game();
-    this.rootElement.append(this.game.element);
+    //this.game.classList.add('game');
+    //this.game.element.style.height = '100%';
+    this.rootElement.append(this.game.getGame());
   }
 
   async start() {
