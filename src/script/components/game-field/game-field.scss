@@ -1,6 +1,6 @@
 .game-field {
   width: 1000px;
-  height: calc(100vh - 64px - 150px);
+  height: calc(100% - 64px);
   display: flex;
   flex-direction: column;
   align-items: center;

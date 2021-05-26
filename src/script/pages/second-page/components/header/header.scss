@@ -107,16 +107,18 @@
 
   &__about {
     background-color: #ffffff;
-    background-image: url('./icons/header/about.png');
+    background-image: url('./icons/header/about.jpg');
   }
 
   &__score {
-    background-image: url('./icons/header/score.png');
+    background-image: url('./icons/header/score.jpg');
+    background-size: contain;
   }
 
   &__settings {
     background-color: #ffffff;
-    background-image: url('./icons/header/settings.png');
+    background-image: url('./icons/header/settings.jpg');
+    background-size: contain;
   }
 }
 
@@ -131,7 +133,7 @@
   height: 40px;
   width: 40px;
   border-radius: 50%;
-  background-image: url('./images/avatar.png');
+  background-image: url('./images/avatar.jpg');
   background-position: center;
   background-size: contain;
   cursor: pointer;

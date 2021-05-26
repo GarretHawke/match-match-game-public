@@ -74,7 +74,7 @@ export default class RegisterForm {
     this.formItemEmail.append(this.labelEmail, this.inputEmail);
 
     this.avatar = createDomNode(this.avatar, 'img', styles['avatar']);
-    this.avatar.setAttribute('src', './images/avatar-reg.png');
+    this.avatar.setAttribute('src', './images/avatar-reg.jpg');
 
     this.buttonField = createDomNode(this.buttonField, 'div', styles['button-field']);
     this.buttonAdd = createDomNode(this.buttonAdd, 'button', styles['button-add']);
