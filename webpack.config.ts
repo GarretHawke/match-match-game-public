@@ -72,9 +72,9 @@ const config: Configuration = {
         test: /\.(png|jpg|gif)$/,
         use: [
           {
-            loader: 'file-loader',
+            loader: 'url-loader',
             options: {
-              //limit: 8192,
+              limit: 8192,
               name: isProduction ? '[contenthash].[ext]' : '[name].[ext]',
               outputPath: 'static/images',
             },
