@@ -2,14 +2,40 @@
   {
     "category": "animals",
     "images": [
-      "puppy.jpeg",
-      "cat.jpg",
-      "eagle.jpg",
-      "elephant.jpg",
+      "chameleon.jpg",
+      "deer.jpg",
+      "gorilla.jpg",
       "lion.jpg",
+      "owl.jpg",
       "penguin.jpg",
-      "tiger.jpg",
-      "wolf.jpg"
+      "rhino.jpg",
+      "sheep.jpg"
+    ]
+  },
+  {
+    "category": "cars",
+    "images": [
+      "ambulance.jpg",
+      "car-breakdown.jpg",
+      "car.jpg",
+      "crane.jpg",
+      "food-truck.jpg",
+      "food.jpg",
+      "prison-bus.jpg",
+      "taxi.jpg"
+    ]
+  },
+  {
+    "category": "professions",
+    "images": [
+      "artist.jpg",
+      "astronaut.jpg",
+      "captain.jpg",
+      "detective.jpg",
+      "diver.jpg",
+      "farmer.jpg",
+      "nurse.jpg",
+      "student.jpg"
     ]
   }
 ]

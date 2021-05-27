@@ -1,9 +1,9 @@
 import { createDomNode } from '@/common';
-// import { BaseComponent } from '@/common/base-component';
 import { Card }  from '../card';
 import { CardsField }  from '../cards-field';
 import { delay } from '../functions/delay';
-// import './game.scss';
+import Timer from '../timer';
+import { WinWindow } from '../win-window';
 import styles from './game.scss';
 
 const FLIP_DELAY = 2000;
@@ -13,11 +13,15 @@ export class Game {
   private activeCard?: Card;
   private isAnimation = false;
   game: HTMLElement;
+  window: WinWindow;
+  timer: Timer;
 
   constructor() {
     this.game = createDomNode(this.game, 'div', styles['game']);
     this.cardsField = new CardsField();
-    this.game.append(this.cardsField.getCardsField());
+    this.timer = new Timer();
+    this.window = new WinWindow();
+    this.game.append(this.cardsField.getCardsField(), this.timer.getTimer(), this.window.getWindow());
   }
 
   getGame(): HTMLElement {
@@ -31,10 +35,30 @@ export class Game {
       .map((url) => new Card(url))
       .sort(() => Math.random() - 0.5);
 
+
+
+
+    let flippedCardsQuantity;
+    setTimeout(() => {
+      const gameStatus = setInterval(() => {
+        const FLIPPED_CARDS = document.querySelectorAll('.flipped');
+        flippedCardsQuantity = FLIPPED_CARDS.length;
+        if (flippedCardsQuantity === 0) {
+          this.timer.stopGame();
+          setTimeout(() => {
+            this.window.showWindow();
+          }, 500);
+          console.log('WIN');
+          clearInterval(gameStatus);
+          return;
+        }
+      }, 1000);
+    }, 5000);
+
     cards.forEach((card) => {
       card.getCard().addEventListener('click', () => {
-        console.log('CARD');
-        this.cardHandler(card)});
+        this.cardHandler(card);
+      });
     });
 
     this.cardsField.addCards(cards);
@@ -61,31 +85,20 @@ export class Game {
     if (this.activeCard.image !== card.image) {
       console.log('NO');
 
-     /*  setTimeout(() => {
-        card.highLightRedCard();
-        this.activeCard?.highLightRedCard();
-      }, 300); */
-
       await delay(100);
       await Promise.all([card.highLightRedCard(), this.activeCard.highLightRedCard()]);
 
       await delay(FLIP_DELAY);
       await Promise.all([this.activeCard.flipToBack(), card.flipToBack(), [await delay(200), await Promise.all([this.activeCard.removeCover(), card.removeCover()])]]);
 
-
-
     } else {
 
       await delay(100);
-      await Promise.all([card.highLightGreenCard(), this.activeCard.highLightGreenCard()]);
-
-
-      /* setTimeout(() => {
-        card.highLightGreenCard();
-        this.activeCard?.highLightGreenCard();
-      }, 300); */
-
+      await Promise.all([card.highLightGreenCard(), this.activeCard.highLightGreenCard()])
       console.log('YES!!!');
+
+      /* const FLIPPED_CARDS = document.querySelectorAll('.flipped');
+      console.log(FLIPPED_CARDS.length); */
     }
 
     this.activeCard = undefined;

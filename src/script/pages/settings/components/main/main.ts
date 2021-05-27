@@ -11,6 +11,8 @@ export default class Main {
     this.main = createDomNode(this.main, 'main', styles['main']);
     this.mainContainer = createDomNode(this.mainContainer, 'div', styles['main-container']);
     this.settingsField = new SettingsField();
+    const cardCategory = this.settingsField.getCardCategory();
+    const CardDifficulty = this.settingsField.getCardDifficulty();
     this.mainContainer.append(this.settingsField.getSettingsField());
     this.main.append(this.mainContainer);
   }
