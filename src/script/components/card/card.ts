@@ -21,12 +21,7 @@ export class Card {
       <div class="card__front" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; backface-visibility: hidden; border-radius: inherit; background-image: url('./images/${image}'); background-position: center; background-size: cover;"></div>
     `;
     this.card.append(this.cardBack, this.cardCover);
-    /* this.cardFront = createDomNode(this.cardFront, 'div', styles['card__front']);
-    this.cardFront.innerHTML = ``
-    this.cardBack = createDomNode(this.cardBack, 'div', styles['card__back']);
-    this.card.append(this.cardFront, this.cardBack); */
     this.cardContainer.append(this.card);
-
   }
 
   highLightGreenCard(): void {
@@ -42,6 +37,22 @@ export class Card {
   }
 
   getCard(): HTMLElement {
+    const sizeOfField = localStorage.getItem('game-difficulty');
+    switch(sizeOfField) {
+      case '0':
+        this.card.style.width = '125px';
+        this.card.style.height = '125px';
+        break;
+      case '1':
+        this.card.style.width = '85px';
+        this.card.style.height = '85px';
+        break;
+      default: {
+        this.card.style.width = '125px';
+        this.card.style.height = '125px';
+      }
+    }
+
     return this.cardContainer;
   }
 
@@ -68,38 +79,4 @@ export class Card {
     });
   }
 }
-
-/* export class Card extends BaseComponent {
-  isFlipped = false;
-
-  constructor(readonly image: string) {
-    super('div', ['card-container']);
-
-    this.element.innerHTML = `
-      <div class="card">
-        <div class="card__front" style="background-image: url('./images/${image}')"></div>
-        <div class="card__back"></div>
-      </div>
-    `;
-  }
-
-  flipToBack(): Promise<void> {
-    this.isFlipped = true;
-    return this.flip(true);
-  }
-
-  flipToFront(): Promise<void> {
-    this.isFlipped = false;
-    return this.flip();
-  }
-
-  private flip(isFront = false): Promise<void> {
-    return new Promise((resolve) => {
-      this.element.classList.toggle(FLIP_CLASS, isFront);
-      this.element.addEventListener('transitionend', () => resolve(), {
-        once: true,
-      });
-    });
-  }
-} */
 

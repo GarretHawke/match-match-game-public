@@ -12,19 +12,23 @@ export class Application {
   }
 
   async start() {
-    const res = await fetch('./images.json');
+    const sizeOfField = localStorage.getItem('game-difficulty');
+    let res = await fetch('./images-small-field.json');
+    switch(sizeOfField) {
+      case '0':
+        res = await fetch('./images-small-field.json');
+        break;
+      case '1':
+        res = await fetch('./images-middle-field.json');
+        break;
+      default: {
+        res = await fetch('./images-small-field.json');
+      }
+    }
     const categories: ImageCategoryModel[] = await res.json();
-
-    //const cat = categories[this.setCardCategory.bind(this)];
-    //console.log(this.setCardCategory());
-
-    const cat = categories[2];
+    const cardCategory = Number(localStorage.getItem('card-category'));
+    const cat = categories[cardCategory];
     const images = cat.images.map((name) => `${cat.category}/${name}`);
     this.game.initGame(images);
-  }
-
-  setCardCategory(): number {
-    const numberOfCategory = new SettingsField().getCardCategory();
-    return numberOfCategory;
   }
 }

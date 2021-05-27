@@ -1,0 +1,71 @@
+[
+  {
+    "category": "animals",
+    "images": [
+      "boar.jpg",
+      "buffalo.jpg",
+      "cat.jpg",
+      "chameleon.jpg",
+      "crocodile.jpg",
+      "deer.jpg",
+      "gorilla.jpg",
+      "ladybug.jpg",
+      "lion.jpg",
+      "owl.jpg",
+      "panda.jpg",
+      "parrot.jpg",
+      "penguin.jpg",
+      "rhino.jpg",
+      "sheep.jpg",
+      "snake.jpg",
+      "turtle.jpg",
+      "walrus.jpg"
+    ]
+  },
+  {
+    "category": "cars",
+    "images": [
+      "ambulance.jpg",
+      "car-breakdown.jpg",
+      "car.jpg",
+      "concrete-mixer.jpg",
+      "crane.jpg",
+      "delivery-truck.jpg",
+      "dump-truck.jpg",
+      "fire-truck.jpg",
+      "food-truck.jpg",
+      "food.jpg",
+      "green-pickup-truck.jpg",
+      "jeeps.jpg",
+      "minibus.jpg",
+      "pickup-truck.jpg",
+      "prison-bus.jpg",
+      "red-car.jpg",
+      "red-crane.jpg",
+      "taxi.jpg"
+    ]
+  },
+  {
+    "category": "professions",
+    "images": [
+      "artist.jpg",
+      "astronaut.jpg",
+      "captain.jpg",
+      "detective.jpg",
+      "diver.jpg",
+      "doctor.jpg",
+      "farmer.jpg",
+      "firefighter.jpg",
+      "judge.jpg",
+      "maid.jpg",
+      "mechanic.jpg",
+      "military.jpg",
+      "nurse.jpg",
+      "postman.jpg",
+      "student.jpg",
+      "taxi-driver.jpg",
+      "welder.jpg",
+      "wrestling.jpg"
+    ]
+  }
+]

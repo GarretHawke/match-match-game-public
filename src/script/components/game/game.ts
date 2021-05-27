@@ -21,7 +21,7 @@ export class Game {
     this.cardsField = new CardsField();
     this.timer = new Timer();
     this.window = new WinWindow();
-    this.game.append(this.cardsField.getCardsField(), this.timer.getTimer(), this.window.getWindow());
+    this.game.append(this.timer.getTimer(), this.cardsField.getCardsField(), this.window.getWindow());
   }
 
   getGame(): HTMLElement {
@@ -34,9 +34,6 @@ export class Game {
       .concat(images)
       .map((url) => new Card(url))
       .sort(() => Math.random() - 0.5);
-
-
-
 
     let flippedCardsQuantity;
     setTimeout(() => {
@@ -53,7 +50,7 @@ export class Game {
           return;
         }
       }, 1000);
-    }, 5000);
+    }, 30000);
 
     cards.forEach((card) => {
       card.getCard().addEventListener('click', () => {
@@ -96,66 +93,9 @@ export class Game {
       await delay(100);
       await Promise.all([card.highLightGreenCard(), this.activeCard.highLightGreenCard()])
       console.log('YES!!!');
-
-      /* const FLIPPED_CARDS = document.querySelectorAll('.flipped');
-      console.log(FLIPPED_CARDS.length); */
     }
 
     this.activeCard = undefined;
     this.isAnimation = false;
   }
 }
-
-/* export class Game extends BaseComponent {
-  private cardsField: CardsField;
-
-  private activeCard?: Card;
-
-  private isAnimation = false;
-
-   constructor() {
-    super();
-    this.cardsField = new CardsField();
-    this.element.appendChild(this.cardsField.getCardsField());
-  }
-
-  initGame(images: string[]): void {
-    this.cardsField = new CardsField();
-    this.element.appendChild(this.cardsField.getCardsField());
-
-    this.cardsField.clear();
-    const cards = images
-      .concat(images)
-      .map((url) => new Card(url))
-      .sort(() => Math.random() - 0.5);
-
-    cards.forEach((card) => {
-      card.element.addEventListener('click', () => this.cardHandler(card));
-    });
-
-    this.cardsField.addCards(cards);
-  }
-
-  private async cardHandler(card: Card) {
-    if (this.isAnimation) return;
-    if (!card.isFlipped) return;
-
-    this.isAnimation = true;
-
-    await card.flipToFront();
-
-    if (!this.activeCard) {
-      this.activeCard = card;
-      this.isAnimation = false;
-      return;
-    }
-
-    if (this.activeCard.image !== card.image) {
-      await delay(FLIP_DELAY);
-      await Promise.all([this.activeCard.flipToBack(), card.flipToBack()]);
-    }
-
-    this.activeCard = undefined;
-    this.isAnimation = false;
-  }
-} */

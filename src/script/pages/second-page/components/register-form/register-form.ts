@@ -27,7 +27,7 @@ export default class RegisterForm {
 
   constructor() {
     this.registerFormContainer = createDomNode(this.registerFormContainer, 'div', styles['register-form-container']);
-    // addStyles(this.registerFormContainer, styles['hidden']);
+
     this.registerForm = createDomNode(this.registerForm, 'div', styles['register-form']);
 
     this.registerFormWrapper = createDomNode(this.registerFormWrapper, 'form', styles['form']);
@@ -120,12 +120,10 @@ export default class RegisterForm {
   }
 
   hideRegisterForm(): void {
-    //addStyles(this.registerFormContainer, styles['hidden']);
     this.registerFormContainer.style.display = 'none';
     console.log('hide');
   }
   revealRegisterForm(): void {
-    // this.registerFormContainer.classList.remove(`${/(hidden)-[a-zA-Z0-9_]+/g}`);
     this.registerFormContainer.style.display = 'block';
     console.log('reveal');
   }

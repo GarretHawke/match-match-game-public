@@ -28,13 +28,4 @@ export default class SettingsPage {
 
     rootDiv.append(this.settingsPage);
   }
-
-  /* clickHandler(): void {
-    this.navigate('/');
-  }
-
-  navigate(pathName: string): void {
-    changeUrl(pathName);
-    this.routing();
-  } */
 }

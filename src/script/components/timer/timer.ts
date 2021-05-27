@@ -33,7 +33,7 @@ export default class Timer {
     setTimeout(() => {
       this.timer.classList.add('active');
       startWatch();
-    }, 5000);
+    }, 30000);
 
     stopButton?.addEventListener('click', () => {
       if (this.timer.classList.contains('active')) {

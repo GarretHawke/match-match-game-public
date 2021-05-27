@@ -13,8 +13,6 @@ export class GameField {
 
   getGameField(): HTMLElement {
     this.gameField = createDomNode(this.gameField, 'div', styles['game-field']);
-    /* this.timer = new Timer().getTimer();
-    this.gameField.append(this.timer); */
     this.appField = createDomNode(this.appField, 'div', styles['app-field']);
     this.appField.id = 'app';
     this.gameField.append(this.appField);
