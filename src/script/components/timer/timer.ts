@@ -4,27 +4,24 @@ import styles from './timer.scss';
 export default class Timer {
   timer: HTMLElement;
   stopWatch: NodeJS.Timeout;
-  timeOfWin: string;
 
   constructor() {
     this.timer = createDomNode(this.timer, 'div', styles['timer']);
     this.timer.innerText = '00:00';
 
     let milliseconds = 0;
-    //let stopWatch: NodeJS.Timeout;
 
     const startWatch = () => {
       this.stopWatch = setInterval(() => {
         milliseconds += 10;
         let dateTimer = new Date(milliseconds);
 
-        this.timeOfWin =
+        this.timer.innerText =
         ('0' + dateTimer.getMinutes()).slice(-2) + ':' +
         ('0' + dateTimer.getSeconds()).slice(-2);
 
-        this.timer.innerText =
-        ('0' + dateTimer.getMinutes()).slice(-2) + ':' +
-        ('0' + dateTimer.getSeconds()).slice(-2)
+        let timeOfWin = String(dateTimer.getMinutes() * 60 + dateTimer.getSeconds());
+        localStorage.setItem('time-of-win', timeOfWin);
       }, 10);
     }
 
@@ -50,8 +47,11 @@ export default class Timer {
     return this.timer;
   }
 
-  stopGame(): string {
+  stopGame(): void {
+    const newTime = localStorage.getItem('time-of-win');
+    const newTimeStr = String(newTime);
+    localStorage.clear();
+    localStorage.setItem('new-time', newTimeStr);
     clearInterval(this.stopWatch);
-    return this.timeOfWin;
   }
 }

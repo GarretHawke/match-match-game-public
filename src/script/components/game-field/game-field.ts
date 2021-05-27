@@ -11,6 +11,8 @@ export class GameField {
   appField: HTMLElement;
   timer: HTMLElement;
 
+  private routing: () => void;
+
   getGameField(): HTMLElement {
     this.gameField = createDomNode(this.gameField, 'div', styles['game-field']);
     this.appField = createDomNode(this.appField, 'div', styles['app-field']);

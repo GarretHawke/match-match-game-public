@@ -16,6 +16,9 @@ export class Game {
   window: WinWindow;
   timer: Timer;
 
+  clicks: number = 0;
+  wrongClicks: number = 0;
+
   constructor() {
     this.game = createDomNode(this.game, 'div', styles['game']);
     this.cardsField = new CardsField();
@@ -80,7 +83,9 @@ export class Game {
     }
 
     if (this.activeCard.image !== card.image) {
-      console.log('NO');
+      console.log('NO', this.clicks, this.wrongClicks);
+      this.wrongClicks++;
+      this.clicks++;
 
       await delay(100);
       await Promise.all([card.highLightRedCard(), this.activeCard.highLightRedCard()]);
@@ -89,13 +94,16 @@ export class Game {
       await Promise.all([this.activeCard.flipToBack(), card.flipToBack(), [await delay(200), await Promise.all([this.activeCard.removeCover(), card.removeCover()])]]);
 
     } else {
-
       await delay(100);
       await Promise.all([card.highLightGreenCard(), this.activeCard.highLightGreenCard()])
-      console.log('YES!!!');
+      console.log('YES!!!', this.clicks);
+      this.clicks++;
     }
 
     this.activeCard = undefined;
     this.isAnimation = false;
+
+     localStorage.setItem('clicks', String(this.clicks));
+     localStorage.setItem('wrong-clicks', String(this.wrongClicks));
   }
 }

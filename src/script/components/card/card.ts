@@ -1,7 +1,5 @@
-// import './card.scss';
 import styles from './card.scss';
 import { createDomNode } from '@/common';
-// import { BaseComponent } from '@/common/base-component';
 
 const FLIP_CLASS = 'flipped';
 

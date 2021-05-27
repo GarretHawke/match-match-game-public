@@ -17,17 +17,6 @@ export default class Main {
     this.mainContainer.append(this.gameField.getGameField());
     this.main.append(this.mainContainer);
 
-   /*  window.onload = () => {
-      const appElement = document.getElementById('app');
-
-      if (!appElement) {
-        throw Error('App root element not found');
-      }
-      console.log('success');
-
-      new Application(appElement).start();
-    } */
-
     return this.main;
   }
 }
