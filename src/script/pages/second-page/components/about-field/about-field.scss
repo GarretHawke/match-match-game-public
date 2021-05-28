@@ -102,7 +102,7 @@
 }
 
 .form-image {
-  height: 100%;
+  height: 80%;
 }
 
 .button-container {
@@ -110,10 +110,12 @@
   height: 20%;
   max-height: 135px;
   display: flex;
-  background-image: url('/images/settings-button.jpg');
-  background-position: center;
-  background-size: auto;
-  background-repeat: no-repeat;
+  justify-content: center;
+  align-items: center;
+}
+
+.button-image {
+  height: 40%;
 }
 
 .game-field-container {
@@ -121,8 +123,10 @@
   height: 35%;
   max-height: 230px;
   display: flex;
-  background-image: url('/images/game-field.jpg');
-  background-position: center;
-  background-size: contain;
-  background-repeat: no-repeat;
+  justify-content: center;
+  align-items: center;
+}
+
+.field-image {
+  height: 80%;
 }

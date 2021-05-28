@@ -23,6 +23,8 @@ export class AboutField {
   gameFieldContainer: HTMLElement;
 
   imageForm: HTMLElement;
+  imageButton: HTMLElement;
+  imageField: HTMLElement;
 
   getAboutField(): HTMLElement {
     this.aboutField = createDomNode(this.aboutField, 'div', styles['about-field']);
@@ -61,8 +63,16 @@ export class AboutField {
     this.imageForm.setAttribute('alt', 'registration form');
     this.formContainer.append(this.imageForm);
     this.buttonContainer = createDomNode(this.formContainer, 'div', styles['button-container']);
+    this.imageButton = createDomNode(this.imageButton, 'img', styles['button-image']);
+    this.imageButton.setAttribute('src', 'images/settings-button.jpg');
+    this.imageButton.setAttribute('alt', 'settings');
+    this.buttonContainer.append(this.imageButton);
     this.gameFieldContainer = createDomNode(this.gameFieldContainer, 'div', styles['game-field-container']);
-;
+    this.imageField = createDomNode(this.imageField, 'img', styles['field-image']);
+    this.imageField.setAttribute('src', '/images/game-field.jpg');
+    this.imageField.setAttribute('alt', 'game field');
+    this.gameFieldContainer.append(this.imageField);
+
     this.stepsContainerRight.append(this.formContainer, this.buttonContainer, this.gameFieldContainer);
 
     this.aboutContainer.append(this.stepsContainerLeft, this.stepsContainerRight);
