@@ -97,10 +97,12 @@
   height: 35%;
   max-height: 230px;
   display: flex;
-  background-image: url('/images/registr-form.jpg');
-  background-position: center;
-  background-size: contain;
-  background-repeat: no-repeat;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-image {
+  height: 100%;
 }
 
 .button-container {

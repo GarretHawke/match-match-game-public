@@ -22,6 +22,8 @@ export class AboutField {
   buttonContainer: HTMLElement;
   gameFieldContainer: HTMLElement;
 
+  imageForm: HTMLElement;
+
   getAboutField(): HTMLElement {
     this.aboutField = createDomNode(this.aboutField, 'div', styles['about-field']);
     this.header = createDomNode(this.header, 'h2', styles['about-header']);
@@ -54,6 +56,10 @@ export class AboutField {
     this.stepsContainerLeft.append(this.stepOneContainer, this.stepTwoContainer, this.stepThreeContainer);
 
     this.formContainer = createDomNode(this.formContainer, 'div', styles['form-container']);
+    this.imageForm = createDomNode(this.imageForm, 'img', styles['form-image']);
+    this.imageForm.setAttribute('src', '/images/registr-form.jpg');
+    this.imageForm.setAttribute('alt', 'registration form');
+    this.formContainer.append(this.imageForm);
     this.buttonContainer = createDomNode(this.formContainer, 'div', styles['button-container']);
     this.gameFieldContainer = createDomNode(this.gameFieldContainer, 'div', styles['game-field-container']);
 ;
