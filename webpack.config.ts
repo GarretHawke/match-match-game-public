@@ -74,7 +74,7 @@ const config: Configuration = {
           {
             loader: 'url-loader',
             options: {
-              limit: 8192,
+              limit: false,
               name: isProduction ? '[contenthash].[ext]' : '[name].[ext]',
               outputPath: 'static/images',
             },
