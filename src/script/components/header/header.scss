@@ -108,20 +108,15 @@
   }
 
   &__about {
-    //background-color: #ffffff;
     background-image: url('/icons/header/question.jpg');
-    //background-size: contain;
   }
 
   &__score {
     background-image: url('/icons/header/favorite.jpg');
-    //background-size: contain;
   }
 
   &__settings {
-    //background-color: #ffffff;
     background-image: url('/icons/header/more.jpg');
-    //background-size: contain;
   }
 }
 
@@ -136,7 +131,7 @@
   height: 40px;
   width: 40px;
   border-radius: 50%;
-  background-image: url('./images/avatar.jpg');
+  background-image: url('/images/avatar.jpg');
   background-position: center;
   background-size: contain;
   cursor: pointer;
