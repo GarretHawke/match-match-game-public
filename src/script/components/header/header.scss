@@ -103,22 +103,25 @@
     background-size: auto;
     background-position: center;
     background-repeat: no-repeat;
+    background-size: contain;
+    background-color: #ffffff;
   }
 
   &__about {
-    background-color: #ffffff;
-    background-image: url('/icons/header/about.jpg');
+    //background-color: #ffffff;
+    background-image: url('/icons/header/question.png');
+    //background-size: contain;
   }
 
   &__score {
-    background-image: url('/icons/header/score.jpg');
-    background-size: contain;
+    background-image: url('/icons/header/favorite.png');
+    //background-size: contain;
   }
 
   &__settings {
-    background-color: #ffffff;
-    background-image: url('/icons/header/settings.jpg');
-    background-size: contain;
+    //background-color: #ffffff;
+    background-image: url('/icons/header/more.png');
+    //background-size: contain;
   }
 }
 
