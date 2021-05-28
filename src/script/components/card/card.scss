@@ -58,7 +58,7 @@
   &__back {
     background-image: url('/images/card.jpg');
     background-position: center;
-    background-size: contain;
+    background-size: cover;
     transform: rotateY(180deg);
   }
 }
