@@ -25,7 +25,7 @@ export class BestField {
     this.scoreItem = createDomNode(this.scoreItem, 'div', styles['score-item']);
     this.personContainer = createDomNode(this.personContainer, 'div', styles['person-container']);
     this.scoreItemImage = createDomNode(this.scoreItemImage, 'img', styles['score-image']);
-    this.scoreItemImage.setAttribute('src', './images/score/image1.jpg');
+    this.scoreItemImage.setAttribute('src', '/images/score/image.jpg');
     this.dataContainer = createDomNode(this.dataContainer, 'div', styles['data-container']);
     this.dataName = createDomNode(this.dataName, 'span', styles['data-name']);
     this.dataName.innerText = 'Nicci Troiani';
