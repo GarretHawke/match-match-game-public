@@ -1,7 +1,5 @@
 import { ImageCategoryModel } from '@/models/image-category-model';
 import { Game } from '../game/game';
-import '../cards-field/cards-field.scss';
-import { SettingsField } from '@/pages/settings/components/settings-field';
 
 export class Application {
   private readonly game: Game;
@@ -13,16 +11,16 @@ export class Application {
 
   async start() {
     const sizeOfField = localStorage.getItem('game-difficulty');
-    let res = await fetch('./images-small-field.json');
+    let res = await fetch('/images-small-field.json');
     switch(sizeOfField) {
       case '0':
-        res = await fetch('./images-small-field.json');
+        res = await fetch('/images-small-field.json');
         break;
       case '1':
-        res = await fetch('./images-middle-field.json');
+        res = await fetch('/images-middle-field.json');
         break;
       default: {
-        res = await fetch('./images-small-field.json');
+        res = await fetch('/images-small-field.json');
       }
     }
     const categories: ImageCategoryModel[] = await res.json();
