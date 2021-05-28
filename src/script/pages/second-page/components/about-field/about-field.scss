@@ -97,12 +97,10 @@
   height: 35%;
   max-height: 230px;
   display: flex;
-  //background-color: #ffffff;
-  background-image: url('./images/registr-form.jpg');
+  background-image: url('/images/registr-form.jpg');
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
-  // cursor: pointer;
 }
 
 .button-container {
@@ -110,12 +108,10 @@
   height: 20%;
   max-height: 135px;
   display: flex;
-  // background-color: #ffffff;
-  background-image: url('./images/settings-button.jpg');
+  background-image: url('/images/settings-button.jpg');
   background-position: center;
   background-size: auto;
   background-repeat: no-repeat;
-  // cursor: pointer;
 }
 
 .game-field-container {
@@ -123,10 +119,8 @@
   height: 35%;
   max-height: 230px;
   display: flex;
-  //background-color: #ffffff;
-  background-image: url('./images/game-field.jpg');
+  background-image: url('/images/game-field.jpg');
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
-  // cursor: pointer;
 }

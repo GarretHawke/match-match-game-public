@@ -1,5 +1,3 @@
-import { Input } from 'postcss';
-import { runInThisContext } from 'vm';
 import { createDomNode, addStyles } from '../../../../common';
 import styles from './register-form.scss';
 
@@ -9,7 +7,7 @@ export default class RegisterForm {
   registerFormWrapper: HTMLElement;
   formHeader: HTMLElement;
   formFields: HTMLElement;
-  avatarField: HTMLElement | any;
+  avatarField: HTMLElement;
   buttonField: HTMLElement;
   formItemName: HTMLElement;
   formItemSurname: HTMLElement;
@@ -74,7 +72,7 @@ export default class RegisterForm {
     this.formItemEmail.append(this.labelEmail, this.inputEmail);
 
     this.avatar = createDomNode(this.avatar, 'img', styles['avatar']);
-    this.avatar.setAttribute('src', './images/avatar-reg.jpg');
+    this.avatar.setAttribute('src', '/images/avatar-reg.jpg');
 
     this.buttonField = createDomNode(this.buttonField, 'div', styles['button-field']);
     this.buttonAdd = createDomNode(this.buttonAdd, 'button', styles['button-add']);
