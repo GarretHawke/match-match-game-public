@@ -47,16 +47,15 @@ export class WinWindow {
 
   clickHandlerScore(): void {
     this.closeWindow();
-    this.rout();
+    //this.rout();
   }
 
-  rout(): void {
-    const rootDiv = document.getElementById('root');
-    const path = window.location.pathname.slice(1);
-    if (rootDiv) {
-      this.bestScorePage.initPage(rootDiv, this.rout.bind(this));
+ /*  rout(): void {
+    const root = document.getElementById('root');
+    if (root) {
+      this.bestScorePage.initPage(root, this.rout.bind(this));
     }
-  }
+  } */
 
   showWindow(): void {
 
@@ -68,7 +67,7 @@ export class WinWindow {
 
     //this.iDB.write('scoreCollection', this.score);
     this.textWin.innerText = `Congratulations! You successfully found all matches in ${this.timeOfWin}s. Your score: ${this.score} `;
-
+    localStorage.setItem('score', String(this.score));
     this.windowContainer.style.display = 'block';
   }
 

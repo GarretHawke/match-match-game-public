@@ -1,7 +1,8 @@
 import Header from '../best-score/components/header';
-import { changeUrl, createDomNode } from '@/common';
+import { createDomNode } from '@/common';
 import styles from './best-score.scss';
 import Main from '../best-score/components/main';
+import { DataBase } from '@/shared/dataBase';
 
 export default class BestScorePage {
   header: Header;

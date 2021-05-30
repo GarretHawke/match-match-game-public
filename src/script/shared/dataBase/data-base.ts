@@ -1,10 +1,3 @@
-export interface MyRecord {
-  firstName: string;
-  lastName: string;
-  email: string;
-  score: number;
-  id?: IDBValidKey;
-}
 
 export class DataBase {
   public database: IDBDatabase;
@@ -30,12 +23,6 @@ export class DataBase {
       this.database = openRequest.result;
     }
   }
-
-  /* addScore(collection: string, data: number) {
-    let transaction = this.database.transaction(collection, 'readwrite');
-    let store = transaction.objectStore(collection);
-    let result = store.put(score:)
-  } */
 
   write<RecordType>(collection: string, data: RecordType): Promise<RecordType> {
     return new Promise((resolve, reject) => {

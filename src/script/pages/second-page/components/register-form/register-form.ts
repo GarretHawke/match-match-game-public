@@ -102,6 +102,8 @@ export default class RegisterForm {
       if (nameInput.validity.valid && surnameInput.validity.valid && emailInput.validity.valid) {
         this.buttonAdd.style.cursor = 'pointer';
         this.buttonAdd.style.backgroundColor = 'rgba(33, 150, 243, 1)';
+        this.buttonAdd.onmouseover = () =>this.buttonAdd.style.backgroundColor = 'rgba(33, 150, 243, 0.7)';
+        this.buttonAdd.onmouseleave = () => this.buttonAdd.style.backgroundColor = 'rgba(33, 150, 243, 1)';
       } else {
         this.buttonAdd.style.cursor = 'default';
         this.buttonAdd.style.backgroundColor = 'rgba(227, 242, 253, 1)';
@@ -118,6 +120,18 @@ export default class RegisterForm {
 
 
     const startButton = document.getElementById('start-button');
+
+    //
+    /* this.buttonAdd.addEventListener('click', () => {
+      event?.preventDefault();
+      console.log('send to db');
+      this.sendRegisterForm();
+      localStorage.setItem('firstName', nameInput.value);
+      localStorage.setItem('lastName', surnameInput.value);
+      localStorage.setItem('email', emailInput.value);
+    }); */
+
+
 
     //
     this.buttonAdd.addEventListener('click', async () => {

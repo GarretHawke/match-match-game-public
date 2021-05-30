@@ -1,6 +1,5 @@
 import { changeUrl, createDomNode } from '@/common';
 import styles from '@/components/header/header.scss';
-import { StartButton } from '../button/start-button';
 import customButton from '@/components/button';
 
 export default class Header {
