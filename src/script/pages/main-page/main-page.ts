@@ -8,7 +8,6 @@ import styles from '@/pages/main-page/main-page.scss';
 export default class MainPage {
   header: Header;
   main: Main;
-  //public card: Card;
 
   private routing: () => void;
 
@@ -26,7 +25,7 @@ export default class MainPage {
 
     this.mainPage = createDomNode(this.mainPage, 'div', styles['main-page']);
     this.main = new Main();
-    this.mainPage.append(this.main.getMain());
+    this.mainPage.append(this.main.getMain(this.routing));
 
     rootDiv.append(this.mainPage);
   }

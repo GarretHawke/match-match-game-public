@@ -50,7 +50,6 @@ export default class Timer {
   stopGame(): void {
     const newTime = localStorage.getItem('time-of-win');
     const newTimeStr = String(newTime);
-    localStorage.clear();
     localStorage.setItem('new-time', newTimeStr);
     clearInterval(this.stopWatch);
   }

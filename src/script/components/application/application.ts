@@ -4,12 +4,15 @@ import { Game } from '../game/game';
 export class Application {
   private readonly game: Game;
 
+  private routing: () => void;
+
   constructor(private readonly rootElement: HTMLElement) {
     this.game = new Game();
     this.rootElement.append(this.game.getGame());
   }
 
-  async start() {
+  async start(routing: () => void) {
+    this.routing = routing;
     const sizeOfField = localStorage.getItem('game-difficulty');
     let res = await fetch('/images-small-field.json');
     switch(sizeOfField) {
@@ -27,6 +30,6 @@ export class Application {
     const cardCategory = Number(localStorage.getItem('card-category'));
     const cat = categories[cardCategory];
     const images = cat.images.map((name) => `${cat.category}/${name}`);
-    this.game.initGame(images);
+    this.game.initGame(images, this.routing);
   }
 }

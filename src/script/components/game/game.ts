@@ -19,19 +19,22 @@ export class Game {
   clicks: number = 0;
   wrongClicks: number = 0;
 
+  private routing: () => void;
+
   constructor() {
     this.game = createDomNode(this.game, 'div', styles['game']);
     this.cardsField = new CardsField();
     this.timer = new Timer();
     this.window = new WinWindow();
-    this.game.append(this.timer.getTimer(), this.cardsField.getCardsField(), this.window.getWindow());
+    this.game.append(this.timer.getTimer(), this.cardsField.getCardsField(), this.window.getWindow(this.routing));
   }
 
   getGame(): HTMLElement {
     return this.game;
   }
 
-  initGame(images: string[]): void {
+  initGame(images: string[], routing: () => void): void {
+    this.routing = routing;
     this.cardsField.clear();
     const cards = images
       .concat(images)
@@ -103,7 +106,7 @@ export class Game {
     this.activeCard = undefined;
     this.isAnimation = false;
 
-     localStorage.setItem('clicks', String(this.clicks));
-     localStorage.setItem('wrong-clicks', String(this.wrongClicks));
+    localStorage.setItem('clicks', String(this.clicks));
+    localStorage.setItem('wrong-clicks', String(this.wrongClicks));
   }
 }

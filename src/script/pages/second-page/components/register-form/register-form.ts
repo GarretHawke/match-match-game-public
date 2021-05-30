@@ -1,5 +1,7 @@
 import { createDomNode, addStyles } from '../../../../common';
 import styles from './register-form.scss';
+import { DataBase } from '@/shared/dataBase';
+import { MyRecord } from '@/shared/My-record';
 
 export default class RegisterForm {
   registerFormContainer: HTMLElement;
@@ -23,10 +25,19 @@ export default class RegisterForm {
   buttonCancel: HTMLElement;
   cover: HTMLElement;
 
+  closeCross: HTMLElement;
+
+  idB: DataBase;
+
   constructor() {
+    this.idB = new DataBase();
+    this.idB.init('GarretHawke');
+
     this.registerFormContainer = createDomNode(this.registerFormContainer, 'div', styles['register-form-container']);
 
     this.registerForm = createDomNode(this.registerForm, 'div', styles['register-form']);
+    this.closeCross = createDomNode(this.closeCross, 'div', styles['close-cross']);
+    this.closeCross.addEventListener('click', this.hideRegisterForm.bind(this));
 
     this.registerFormWrapper = createDomNode(this.registerFormWrapper, 'form', styles['form']);
     this.formHeader = createDomNode(this.formHeader, 'h3', styles['form-header']);
@@ -39,9 +50,11 @@ export default class RegisterForm {
     addStyles(this.formItemName, styles['name']);
     this.labelName = createDomNode(this.labelName, 'label', styles['label']);
     this.labelName.setAttribute('for', 'name-field');
+    this.labelName.setAttribute('autocomplete', 'nope');
     this.labelName.innerText = 'First Name';
     this.inputName = createDomNode(this.inputName, 'input', styles['input']);
     this.inputName.setAttribute('type', 'text');
+    this.inputName.setAttribute('pattern', '[a-zA-Zа-яА-я]{1,30}');
     this.inputName.id = 'name-field';
     this.inputName.setAttribute('placeholder', 'John');
     this.inputName.setAttribute('required', '');
@@ -51,9 +64,11 @@ export default class RegisterForm {
     addStyles(this.formItemSurname, styles['surname']);
     this.labelSurname = createDomNode(this.labelSurname, 'label', styles['label']);
     this.labelSurname.setAttribute('for', 'surname-field');
+    this.labelSurname.setAttribute('autocomplete', 'nope');
     this.labelSurname.innerText = 'Last Name';
     this.inputSurname = createDomNode(this.inputName, 'input', styles['input']);
     this.inputSurname.setAttribute('type', 'text');
+    this.inputSurname.setAttribute('pattern', '[a-zA-Zа-яА-я]{1,30}');
     this.inputSurname.id = 'surname-field';
     this.inputSurname.setAttribute('placeholder', 'Doe');
     this.inputSurname.setAttribute('required', '');
@@ -63,9 +78,11 @@ export default class RegisterForm {
     addStyles(this.formItemEmail, styles['email']);
     this.labelEmail = createDomNode(this.labelEmail, 'label', styles['label']);
     this.labelEmail.setAttribute('for', 'email-field');
+    this.labelEmail.setAttribute('autocomplete', 'nope');
     this.labelEmail.innerText = 'Email';
     this.inputEmail = createDomNode(this.inputEmail, 'input', styles['input']);
     this.inputEmail.setAttribute('type', 'email');
+    //this.inputEmail.setAttribute('pattern', '');
     this.inputEmail.id = 'email-field';
     this.inputEmail.setAttribute('placeholder', 'johndoe@gmail.com');
     this.inputEmail.setAttribute('required', '');
@@ -77,11 +94,57 @@ export default class RegisterForm {
     this.buttonField = createDomNode(this.buttonField, 'div', styles['button-field']);
     this.buttonAdd = createDomNode(this.buttonAdd, 'button', styles['button-add']);
     this.buttonAdd.setAttribute('type', 'submit');
+    this.buttonAdd.style.cursor = 'default';
+    this.buttonAdd.style.backgroundColor = 'rgba(227, 242, 253, 1)';
     this.buttonAdd.innerText = 'add user';
+
+    const validate = () => {
+      if (nameInput.validity.valid && surnameInput.validity.valid && emailInput.validity.valid) {
+        this.buttonAdd.style.cursor = 'pointer';
+        this.buttonAdd.style.backgroundColor = 'rgba(33, 150, 243, 1)';
+      } else {
+        this.buttonAdd.style.cursor = 'default';
+        this.buttonAdd.style.backgroundColor = 'rgba(227, 242, 253, 1)';
+      }
+    }
+
+    let nameInput = this.inputName as HTMLInputElement;
+    let surnameInput = this.inputSurname as HTMLInputElement;
+    let emailInput = this.inputEmail as HTMLInputElement;
+
+    this.inputName.addEventListener('input', validate);
+    this.inputSurname.addEventListener('input', validate);
+    this.inputEmail.addEventListener('input', validate);
+
+
+    const startButton = document.getElementById('start-button');
+
+    //
+    this.buttonAdd.addEventListener('click', async () => {
+      event?.preventDefault();
+      console.log('send to db');
+      this.sendRegisterForm();
+
+      let user = {
+        firstName: nameInput.value,
+        lastName: surnameInput.value,
+        email: emailInput.value,
+        score: 0,
+      }
+
+     let newRec = await this.idB.write<MyRecord>('scoreCollection', user);
+      console.log(newRec);
+
+      //this.clearRegisterForm();
+    });
+    //
+
     this.buttonCancel = createDomNode(this.buttonCancel, 'button', styles['button-cancel']);
 
     this.buttonCancel.addEventListener('click', () => {
-      this.hideRegisterForm();
+      event?.preventDefault();
+      //this.hideRegisterForm();
+      this.clearRegisterForm();
     });
 
     this.buttonCancel.innerText = 'cancel';
@@ -94,35 +157,40 @@ export default class RegisterForm {
     this.cover = createDomNode(this.cover, 'div', styles['cover']);
     this.cover.id = 'cover';
 
-    this.registerForm.append(this.formHeader, this.registerFormWrapper);
+    this.registerForm.append(this.formHeader, this.registerFormWrapper, this.closeCross);
 
     this.registerFormContainer.append(this.registerForm, this.cover);
-
-    ////////////////
-   /*  const uploadImage = () => {
-      const file = this.avatarField;
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => {
-        this.avatar.removeAttribute('src');
-        this.avatar.setAttribute('src', `${reader.result}`);
-      }
-    } */
-
-    /* this.avatar.addEventListener('click', uploadImage); */
-
   }
 
   getRegisterForm(): HTMLElement {
     return this.registerFormContainer;
   }
 
+  sendRegisterForm(): void {
+    const nameField = this.inputName as HTMLInputElement;
+    const surnameField = this.inputSurname as HTMLInputElement;
+    const emailField = this.inputEmail as HTMLInputElement;
+    if (nameField.validity.valid && surnameField.validity.valid && emailField.validity.valid) {
+      this.registerFormContainer.style.display = 'none';
+      console.log('hide');
+    }
+  }
+
   hideRegisterForm(): void {
     this.registerFormContainer.style.display = 'none';
-    console.log('hide');
   }
+
   revealRegisterForm(): void {
     this.registerFormContainer.style.display = 'block';
-    console.log('reveal');
+    console.log('appear');
+  }
+
+  clearRegisterForm(): void {
+    let nameInput = this.inputName as HTMLInputElement;
+    let surnameInput = this.inputSurname as HTMLInputElement;
+    let emailInput = this.inputEmail as HTMLInputElement;
+    nameInput.value = '';
+    surnameInput.value = '';
+    emailInput.value = '';
   }
 }

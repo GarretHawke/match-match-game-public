@@ -1,11 +1,11 @@
 import { createDomNode, changeUrl } from '@/common';
 import styles from './header.scss';
 import { StartButton } from '../../../second-page/components/button/start-button';
-import customButton from '../../../../components/button/';
 import { start } from 'repl';
 import RegisterForm from '../register-form';
 import { revealForm } from '../open-form';
 import { removeStyles } from '@/common/common';
+import customButton from '@/components/button/button';
 
 export default class Header {
   header: HTMLElement;
@@ -24,8 +24,8 @@ export default class Header {
   navTextScore: HTMLElement;
   navTextSettings: HTMLElement;
   profile: HTMLElement;
-  registerForm: HTMLElement;
-  startButton: StartButton;
+  registerForm: RegisterForm;
+  startButton: HTMLElement;
 
   headerLeft: HTMLElement;
   headerRight: HTMLElement;
@@ -33,6 +33,7 @@ export default class Header {
   private routing: () => void;
 
   constructor() {
+    this.registerForm = new RegisterForm();
     this.header = createDomNode(this.header, 'header', styles['header']);
     this.headerContainer = createDomNode(this.headerContainer, 'div', styles['header-container']);
     this.header.append(this.headerContainer);
@@ -70,18 +71,25 @@ export default class Header {
     this.navSettings.append(this.iconSettings, this.navTextSettings);
     this.nav.append(this.navAbout, this.navScore, this.navSettings);
 
-    this.startButton = new StartButton();
+
+    this.startButton = customButton('Settings', this.clickHandlerRegister.bind(this), styles['start-button']);
+    this.startButton.innerText = 'register new player';
+    this.startButton.id = 'start-button';
 
     this.profile = createDomNode(this.profile, 'div', styles['profile']);
 
     this.headerLeft.append(this.logo, this.nav);
-    this.headerRight.append(this.startButton.getButton(), this.profile);
+    this.headerRight.append(this.startButton, this.profile);
     this.headerContainer.append(this.headerLeft, this.headerRight);
   }
 
   getHeader(routing: () => void): HTMLElement {
     this.routing = routing;
     return this.header;
+  }
+
+  clickHandlerRegister(): void {
+
   }
 
   clickHandlerAbout(): void {

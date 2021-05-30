@@ -1,4 +1,5 @@
 .register-form {
+  position: relative;
   width: 640px;
   height: 460px;
   padding: 20px;
@@ -81,6 +82,32 @@
   font-size: 16px;
   line-height: 128%;
   color: rgba(0, 0, 0, 0.87);
+
+  &:valid:focus {
+    border: 1px solid green;
+    background-color: rgba(10, 207, 131, 0.1);
+  }
+
+  &:valid {
+    background-image: url('./icons/check.jpg');
+    background-position: right;
+    background-repeat: no-repeat;
+    background-size:contain;
+    background-color: rgba(10, 207, 131, 0.1);
+  }
+
+  &:invalid:focus {
+    border: 1px solid red;
+    background-color: rgba(242, 78, 30, 0.1);
+  }
+
+  &:invalid {
+    background-color: rgba(242, 78, 30, 0.1);
+  }
+
+  &:empty {
+    background-color: transparent;
+  }
 }
 
 .avatar-field {
@@ -155,4 +182,16 @@
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.3);
   z-index: 10;
+}
+
+.close-cross {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  height: 30px;
+  width: 30px;
+  background-image: url('./icons/cancel.jpg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  cursor: pointer;
 }

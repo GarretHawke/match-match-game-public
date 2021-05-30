@@ -60,7 +60,6 @@ export class SettingsField {
   }
 
   getSettingsField(): HTMLElement {
-    //localStorage.clear();
 
     const selectionType = this.gameCardsSelection as HTMLSelectElement;
     this.gameCardsSelection.addEventListener('change', () => {

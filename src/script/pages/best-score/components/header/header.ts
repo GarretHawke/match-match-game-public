@@ -1,6 +1,5 @@
 import { changeUrl, createDomNode } from "@/common";
 import { customButton } from "@/components";
-import { StartButton } from "@/components/button/start-button";
 import styles from './header.scss';
 
 export default class Header {
@@ -65,8 +64,6 @@ export default class Header {
     this.navScore.append(this.iconScore, this.navTextScore);
     this.navSettings.append(this.iconSettings, this.navTextSettings);
     this.nav.append(this.navAbout, this.navScore, this.navSettings);
-
-    //this.startButton = new StartButton();
 
     this.startButton = customButton('Settings', this.clickHandlerStart.bind(this), styles['start-button']);
     this.startButton.innerText = 'start game';

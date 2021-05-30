@@ -36,7 +36,6 @@ export default class SecondPage {
 
     const registerButton = document.getElementById('start-button');
     registerButton?.addEventListener('click', () => {
-      console.log('button works!');
       this.registerForm.revealRegisterForm();
     });
 

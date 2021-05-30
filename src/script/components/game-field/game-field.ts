@@ -13,7 +13,8 @@ export class GameField {
 
   private routing: () => void;
 
-  getGameField(): HTMLElement {
+  getGameField(routing: () => void): HTMLElement {
+    this.routing = routing;
     this.gameField = createDomNode(this.gameField, 'div', styles['game-field']);
     this.appField = createDomNode(this.appField, 'div', styles['app-field']);
     this.appField.id = 'app';
@@ -27,7 +28,7 @@ export class GameField {
       }
       console.log('success');
 
-      new Application(appElement).start();
+      new Application(appElement).start(routing);
     }, 1000);
 
     return this.gameField;
