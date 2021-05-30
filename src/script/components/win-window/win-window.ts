@@ -1,4 +1,5 @@
 import { changeUrl, createDomNode } from '@/common';
+import { BestScorePage } from '@/pages';
 import { DataBase } from '@/shared/dataBase';
 import customButton from '../button';
 import styles from './win-window.scss';
@@ -10,6 +11,8 @@ export class WinWindow {
   textWin: HTMLElement;
   closeButton: HTMLElement;
 
+  bestScorePage: BestScorePage;
+
   timeOfWin: number;
   clicks: number;
   wrongClicks: number;
@@ -17,9 +20,10 @@ export class WinWindow {
 
   iDB: DataBase;
 
-  public routing: () => void;
-
   constructor(){
+
+    this.bestScorePage = new BestScorePage();
+
     this.iDB = new DataBase();
     this.iDB.init('GarretHawke');
 
@@ -37,19 +41,21 @@ export class WinWindow {
     this.windowContainer.append(this.cover, this.window);
   }
 
-  getWindow(routing: () => void): HTMLElement {
-    this.routing = routing;
+  getWindow(): HTMLElement {
     return this.windowContainer;
   }
 
   clickHandlerScore(): void {
     this.closeWindow();
-    //this.navigate('/best-score');
+    this.rout();
   }
 
-  navigate(pathName: string): void {
-    changeUrl(pathName);
-    this.routing();
+  rout(): void {
+    const rootDiv = document.getElementById('root');
+    const path = window.location.pathname.slice(1);
+    if (rootDiv) {
+      this.bestScorePage.initPage(rootDiv, this.rout.bind(this));
+    }
   }
 
   showWindow(): void {

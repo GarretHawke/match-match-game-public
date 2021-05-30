@@ -7,16 +7,13 @@ export default class Main {
   mainContainer: HTMLElement;
   gameField: GameField;
 
-  private routing: () => void;
-
-  getMain(routing: () => void): HTMLElement {
-    this.routing = routing;
+  getMain(): HTMLElement {
     this.main = createDomNode(this.main, 'main', styles['main']);
     this.mainContainer = createDomNode(this.mainContainer, 'div', styles['main-container']);
 
     this.gameField = new GameField();
 
-    this.mainContainer.append(this.gameField.getGameField(this.routing));
+    this.mainContainer.append(this.gameField.getGameField());
     this.main.append(this.mainContainer);
 
     return this.main;

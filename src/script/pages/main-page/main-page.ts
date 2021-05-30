@@ -1,7 +1,5 @@
-import { createDomNode, changeUrl } from '@/common';
-import { Header, customButton } from '@/components';
-import { Application } from '@/components/application';
-import { Card } from '@/components/card';
+import { createDomNode } from '@/common';
+import { Header } from '@/components';
 import Main from '@/components/main';
 import styles from '@/pages/main-page/main-page.scss';
 
@@ -25,7 +23,7 @@ export default class MainPage {
 
     this.mainPage = createDomNode(this.mainPage, 'div', styles['main-page']);
     this.main = new Main();
-    this.mainPage.append(this.main.getMain(this.routing));
+    this.mainPage.append(this.main.getMain());
 
     rootDiv.append(this.mainPage);
   }

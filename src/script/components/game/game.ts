@@ -19,22 +19,19 @@ export class Game {
   clicks: number = 0;
   wrongClicks: number = 0;
 
-  private routing: () => void;
-
   constructor() {
     this.game = createDomNode(this.game, 'div', styles['game']);
     this.cardsField = new CardsField();
     this.timer = new Timer();
     this.window = new WinWindow();
-    this.game.append(this.timer.getTimer(), this.cardsField.getCardsField(), this.window.getWindow(this.routing));
+    this.game.append(this.timer.getTimer(), this.cardsField.getCardsField(), this.window.getWindow());
   }
 
   getGame(): HTMLElement {
     return this.game;
   }
 
-  initGame(images: string[], routing: () => void): void {
-    this.routing = routing;
+  initGame(images: string[]): void {
     this.cardsField.clear();
     const cards = images
       .concat(images)
@@ -51,7 +48,6 @@ export class Game {
           setTimeout(() => {
             this.window.showWindow();
           }, 500);
-          console.log('WIN');
           clearInterval(gameStatus);
           return;
         }
@@ -86,7 +82,6 @@ export class Game {
     }
 
     if (this.activeCard.image !== card.image) {
-      console.log('NO', this.clicks, this.wrongClicks);
       this.wrongClicks++;
       this.clicks++;
 
@@ -98,8 +93,7 @@ export class Game {
 
     } else {
       await delay(100);
-      await Promise.all([card.highLightGreenCard(), this.activeCard.highLightGreenCard()])
-      console.log('YES!!!', this.clicks);
+      await Promise.all([card.highLightGreenCard(), this.activeCard.highLightGreenCard()]);
       this.clicks++;
     }
 
