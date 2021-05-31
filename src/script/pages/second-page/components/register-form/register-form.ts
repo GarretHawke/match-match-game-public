@@ -2,6 +2,7 @@ import { createDomNode, addStyles } from '../../../../common';
 import styles from './register-form.scss';
 import { DataBase } from '@/shared/dataBase';
 import { MyRecord } from '@/shared/My-record';
+import { removeStyles } from '@/common/common';
 
 export default class RegisterForm {
   registerFormContainer: HTMLElement;
@@ -24,6 +25,7 @@ export default class RegisterForm {
   buttonAdd: HTMLElement;
   buttonCancel: HTMLElement;
   cover: HTMLElement;
+  emailValid: boolean = false;
 
   closeCross: HTMLElement;
 
@@ -58,6 +60,8 @@ export default class RegisterForm {
     this.inputName.id = 'name-field';
     this.inputName.setAttribute('placeholder', 'John');
     this.inputName.setAttribute('required', '');
+    this.inputName.classList.add('invalid');
+    addStyles(this.inputName, styles['invalid']);
     this.formItemName.append(this.labelName, this.inputName);
 
     this.formItemSurname = createDomNode(this.formItemSurname, 'div', styles['form-item']);
@@ -72,6 +76,8 @@ export default class RegisterForm {
     this.inputSurname.id = 'surname-field';
     this.inputSurname.setAttribute('placeholder', 'Doe');
     this.inputSurname.setAttribute('required', '');
+    this.inputSurname.classList.add('invalid');
+    addStyles(this.inputSurname, styles['invalid']);
     this.formItemSurname.append(this.labelSurname, this.inputSurname);
 
     this.formItemEmail = createDomNode(this.formItemEmail, 'div', styles['form-item']);
@@ -82,11 +88,36 @@ export default class RegisterForm {
     this.labelEmail.innerText = 'Email';
     this.inputEmail = createDomNode(this.inputEmail, 'input', styles['input']);
     this.inputEmail.setAttribute('type', 'email');
-    //this.inputEmail.setAttribute('pattern', '');
+    this.inputEmail.classList.add('invalid');
+    addStyles(this.inputEmail, styles['invalid']);
+
+    const FirstPartOfRegExp =
+      /^(([^<>()\\[\]\\.,;:\s@"]+(\.[^<>()\\[\]\\.,;:\s@"]+)*)|(".+"))/;
+    const SecondPartOfRegExp =
+      /@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    const regex = new RegExp(
+      `${FirstPartOfRegExp.source}${SecondPartOfRegExp.source}`,
+    );
+
     this.inputEmail.id = 'email-field';
     this.inputEmail.setAttribute('placeholder', 'johndoe@gmail.com');
     this.inputEmail.setAttribute('required', '');
     this.formItemEmail.append(this.labelEmail, this.inputEmail);
+
+    this.inputEmail.addEventListener('input', () => {
+      if (regex.test(emailInput.value)) {
+        this.emailValid = true;
+        this.inputEmail.style.backgroundColor = 'rgba(10, 207, 131, 0.1)';
+        this.inputEmail.style.border = '1px solid green';
+        this.inputEmail.style.backgroundImage = 'url(./icons/check.jpg)';
+
+      } else {
+        this.emailValid = false;
+        this.inputEmail.style.backgroundColor = 'rgba(242, 78, 30, 0.1)';
+        this.inputEmail.style.border = '1px solid red';
+        this.inputEmail.style.backgroundImage = 'none';
+      }
+    });
 
     this.avatar = createDomNode(this.avatar, 'img', styles['avatar']);
     this.avatar.setAttribute('src', '/images/avatar-reg.jpg');
@@ -94,19 +125,13 @@ export default class RegisterForm {
     this.buttonField = createDomNode(this.buttonField, 'div', styles['button-field']);
     this.buttonAdd = createDomNode(this.buttonAdd, 'button', styles['button-add']);
     this.buttonAdd.setAttribute('type', 'submit');
-    this.buttonAdd.style.cursor = 'default';
-    this.buttonAdd.style.backgroundColor = 'rgba(227, 242, 253, 1)';
+    this.buttonAdd.setAttribute('disabled', '');
     this.buttonAdd.innerText = 'add user';
-
     const validate = () => {
-      if (nameInput.validity.valid && surnameInput.validity.valid && emailInput.validity.valid) {
-        this.buttonAdd.style.cursor = 'pointer';
-        this.buttonAdd.style.backgroundColor = 'rgba(33, 150, 243, 1)';
-        this.buttonAdd.onmouseover = () =>this.buttonAdd.style.backgroundColor = 'rgba(33, 150, 243, 0.7)';
-        this.buttonAdd.onmouseleave = () => this.buttonAdd.style.backgroundColor = 'rgba(33, 150, 243, 1)';
+      if (nameInput.validity.valid && surnameInput.validity.valid && this.emailValid === true) {
+        this.buttonAdd.removeAttribute('disabled');
       } else {
-        this.buttonAdd.style.cursor = 'default';
-        this.buttonAdd.style.backgroundColor = 'rgba(227, 242, 253, 1)';
+        this.buttonAdd.setAttribute('disabled', '');
       }
     }
 
@@ -184,9 +209,8 @@ export default class RegisterForm {
     const nameField = this.inputName as HTMLInputElement;
     const surnameField = this.inputSurname as HTMLInputElement;
     const emailField = this.inputEmail as HTMLInputElement;
-    if (nameField.validity.valid && surnameField.validity.valid && emailField.validity.valid) {
+    if (nameField.validity.valid && surnameField.validity.valid && this.emailValid === true) {
       this.registerFormContainer.style.display = 'none';
-      console.log('hide');
     }
   }
 
@@ -196,7 +220,6 @@ export default class RegisterForm {
 
   revealRegisterForm(): void {
     this.registerFormContainer.style.display = 'block';
-    console.log('appear');
   }
 
   clearRegisterForm(): void {
