@@ -37,15 +37,13 @@ export class DataBase {
       }
 
       let store = transaction.objectStore(collection);
-      let res = store.add({});
+      let res = store.put({});
       let transResult: RecordType;
       res.onsuccess = () => {
         res.result;
         let newRecord: RecordType = { ...data, id: res.result };
         transResult = newRecord;
-        let result = store.put(transResult); //тут возможно newRecord
-
-        console.log(result);
+        let result = store.put(transResult);
 
         result.onsuccess = () => {
           console.log('complete', result.result);

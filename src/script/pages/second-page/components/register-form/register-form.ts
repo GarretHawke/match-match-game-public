@@ -172,7 +172,8 @@ export default class RegisterForm {
       }
 
      let newRec = await this.idB.write<MyRecord>('scoreCollection', user);
-      console.log(newRec);
+
+      localStorage.setItem('start', 'true');
 
       //this.clearRegisterForm();
     });
@@ -229,5 +230,6 @@ export default class RegisterForm {
     nameInput.value = '';
     surnameInput.value = '';
     emailInput.value = '';
+    this.inputEmail.style.backgroundImage = 'none';
   }
 }

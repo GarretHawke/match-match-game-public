@@ -6,6 +6,7 @@ import RegisterForm from '../register-form';
 import { revealForm } from '../open-form';
 import { removeStyles } from '@/common/common';
 import customButton from '@/components/button/button';
+import { DataBase } from '@/shared/dataBase';
 
 export default class Header {
   header: HTMLElement;
@@ -26,6 +27,7 @@ export default class Header {
   profile: HTMLElement;
   registerForm: RegisterForm;
   startButton: HTMLElement;
+  registerButton: HTMLElement;
 
   headerLeft: HTMLElement;
   headerRight: HTMLElement;
@@ -33,6 +35,8 @@ export default class Header {
   private routing: () => void;
 
   constructor() {
+    localStorage.clear();
+
     this.registerForm = new RegisterForm();
     this.header = createDomNode(this.header, 'header', styles['header']);
     this.headerContainer = createDomNode(this.headerContainer, 'div', styles['header-container']);
@@ -71,20 +75,28 @@ export default class Header {
     this.navSettings.append(this.iconSettings, this.navTextSettings);
     this.nav.append(this.navAbout, this.navScore, this.navSettings);
 
+    this.registerButton = customButton('Register', this.clickHandlerRegister.bind(this), styles['start-button']);
+    this.registerButton.innerText = 'register new player';
+    this.registerButton.id = 'start-button';
 
-    this.startButton = customButton('Settings', this.clickHandlerRegister.bind(this), styles['start-button']);
-    this.startButton.innerText = 'register new player';
-    this.startButton.id = 'start-button';
 
+    window.addEventListener('click', () => {
+      if (String(localStorage.getItem('start')) === 'true') {
+        this.startButton = customButton('Settings', this.clickHandlerSettings.bind(this), styles['start-button']);
+        this.startButton.innerText = 'start game';
+        this.headerRight.replaceChild(this.startButton, this.registerButton);
+      }
+    });
     this.profile = createDomNode(this.profile, 'div', styles['profile']);
 
     this.headerLeft.append(this.logo, this.nav);
-    this.headerRight.append(this.startButton, this.profile);
+    this.headerRight.append(this.registerButton, this.profile);
     this.headerContainer.append(this.headerLeft, this.headerRight);
   }
 
   getHeader(routing: () => void): HTMLElement {
     this.routing = routing;
+
     return this.header;
   }
 
