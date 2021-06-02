@@ -1,6 +1,7 @@
 import { changeUrl, createDomNode } from '@/common';
 import { BestScorePage } from '@/pages';
 import { DataBase } from '@/shared/dataBase';
+import { MyRecord } from '@/shared/My-record';
 import customButton from '../button';
 import styles from './win-window.scss';
 
@@ -20,12 +21,14 @@ export class WinWindow {
 
   iDB: DataBase;
 
+  private routing: () => void;
+
   constructor(){
 
     this.bestScorePage = new BestScorePage();
 
     this.iDB = new DataBase();
-    this.iDB.init('GarretHawke');
+    this.iDB.init('garrethawke');
 
     this.windowContainer = createDomNode(this.windowContainer, 'div', styles['window-container']);
     this.cover = createDomNode(this.cover, 'div', styles['cover']);
@@ -47,17 +50,18 @@ export class WinWindow {
 
   clickHandlerScore(): void {
     this.closeWindow();
-    //this.rout();
+    /* this.bestScorePage = new BestScorePage();
+
+    const rootDiv = document.getElementById('root');
+    if (rootDiv) {
+      this.bestScorePage.initPage(rootDiv, this.routing.bind(this));
+    } */
   }
 
- /*  rout(): void {
-    const root = document.getElementById('root');
-    if (root) {
-      this.bestScorePage.initPage(root, this.rout.bind(this));
-    }
-  } */
-
   showWindow(): void {
+
+
+
 
     this.timeOfWin = Number(String(localStorage.getItem('new-time')));
     this.clicks = Number(String(localStorage.getItem('clicks')));
@@ -65,9 +69,24 @@ export class WinWindow {
 
     this.score = (this.clicks - this.wrongClicks) * 100 - this.timeOfWin * 10;
 
-    //this.iDB.write('scoreCollection', this.score);
+    setTimeout (async () => {
+      let arr = await this.iDB.readAll<MyRecord>('scoreCollection');
+
+      let user = {
+        firstName: localStorage.getItem('name'),
+        lastName: localStorage.getItem('surname'),
+        email: localStorage.getItem('email'),
+        score: this.score,
+      }
+
+      this.iDB.write('scoreCollection', user);
+    }, 200);
+
+
+
+
     this.textWin.innerText = `Congratulations! You successfully found all matches in ${this.timeOfWin}s. Your score: ${this.score} `;
-    localStorage.setItem('score', String(this.score));
+    //localStorage.setItem('score', String(this.score));
     this.windowContainer.style.display = 'block';
   }
 

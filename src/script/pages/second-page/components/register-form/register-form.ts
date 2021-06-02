@@ -33,7 +33,7 @@ export default class RegisterForm {
 
   constructor() {
     this.idB = new DataBase();
-    this.idB.init('GarretHawke');
+    this.idB.init('garrethawke');
 
     this.registerFormContainer = createDomNode(this.registerFormContainer, 'div', styles['register-form-container']);
 
@@ -164,7 +164,11 @@ export default class RegisterForm {
       console.log('send to db');
       this.sendRegisterForm();
 
-      let user = {
+      localStorage.setItem('name', nameInput.value);
+      localStorage.setItem('surname', surnameInput.value);
+      localStorage.setItem('email', emailInput.value);
+
+     /*  let user = {
         firstName: nameInput.value,
         lastName: surnameInput.value,
         email: emailInput.value,
@@ -172,6 +176,7 @@ export default class RegisterForm {
       }
 
      let newRec = await this.idB.write<MyRecord>('scoreCollection', user);
+     console.log(newRec); */
 
       localStorage.setItem('start', 'true');
 

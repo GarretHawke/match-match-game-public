@@ -1,7 +1,8 @@
 import './style/index.scss';
 import App from '@/routing';
-import { DataBase } from '@/shared/dataBase';
+//import { DataBase } from '@/shared/dataBase';
 import { MyRecord } from '@/shared/My-record';
+import { idText } from 'typescript';
 
 const app = new App();
 window.onload = () => {
@@ -16,11 +17,11 @@ window.onpopstate = () => {
 
 
 /* const iDB = new DataBase();
-iDB.init('GarretHawke'); */
+iDB.init('garrethawke');
 
 
 
-/* class Control {
+class Control {
   public node: HTMLElement;
   constructor(parentNode: HTMLElement, tagName: string = 'div', className: string = '', caption: string = 'sdc') {
     let el = document.createElement('button');
@@ -62,3 +63,91 @@ filterButton.onClick = async () => {
   let newRec = await iDB.write<MyRecord>('scoreCollection', oxi);
   console.log('-->', result);
 } */
+
+
+/* const iDB = window.indexedDB;
+
+let database: IDBDatabase = null!;
+
+
+
+const openRequest = iDB.open('garrethawke');
+openRequest.onupgradeneeded = () => {
+  database = openRequest.result;
+  let store = database.createObjectStore('scoreCollection', {keyPath: 'id', autoIncrement: true});
+  store.createIndex('name', 'name');
+  store.createIndex('surname', 'surname');
+  store.createIndex('email', 'email', {unique: true});
+  store.createIndex('score', 'score');
+}
+
+openRequest.onsuccess = () => {
+  database = openRequest.result;
+
+  let transaction = database.transaction('scoreCollection', 'readwrite');
+  let store =  transaction.objectStore('scoreCollection');
+  //store.add({name: 'iva', surname: 'logan', email: '1@', score: 0, id: 1});
+  let result = store.put({name: 'glasha', surname: 'logan', email: '3@', score: 350, id: 3});
+
+  result.onsuccess = () => {
+    console.log('complete', result.result);
+  }
+
+  result.onerror = () => {
+    console.log('error: ', result.error);
+  }
+}
+
+let el = document.createElement('button');
+el.textContent = 'list';
+document.body.append(el);
+el.onclick = () => {
+  let transaction = database.transaction('scoreCollection', 'readonly');
+  let store =  transaction.objectStore('scoreCollection');
+  let result = store.getAll();
+
+  transaction.oncomplete = () => {
+    console.log(result.result);
+  }
+
+  transaction.onerror = () => {
+    console.log('error: ', transaction.error);
+  }
+
+  transaction.onabort = () => {
+    console.log('abort');
+  }
+}
+
+let el1 = document.createElement('button');
+el1.textContent = 'filter';
+document.body.append(el1);
+el1.onclick = () => {
+  let transaction = database.transaction('scoreCollection', 'readonly');
+  let store =  transaction.objectStore('scoreCollection');
+  let result = store.index('score').openCursor(null, 'prev');
+  let resData: Array<> = [];
+  result.onsuccess = () => {
+    let cursor = result.result;
+    if (cursor) {
+      console.log(cursor.value);
+      if (cursor.value.score > 100) {
+        resData.push(cursor.value);
+      }
+      cursor.continue();
+    }
+  }
+
+  transaction.oncomplete = () => {
+    console.log(resData);
+  }
+
+  transaction.onerror = () => {
+    console.log('error: ', transaction.error);
+  }
+
+  transaction.onabort = () => {
+    console.log('abort');
+  }
+} */
+

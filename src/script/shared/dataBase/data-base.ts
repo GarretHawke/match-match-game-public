@@ -33,15 +33,15 @@ export class DataBase {
       }
 
       transaction.onerror = () => {
-        reject(transaction.error);  // hz
+        reject(transaction.error);
       }
 
       let store = transaction.objectStore(collection);
-      let res = store.put({});
+      let res = store.add({});
       let transResult: RecordType;
       res.onsuccess = () => {
-        res.result;
-        let newRecord: RecordType = { ...data, id: res.result };
+        let newRes =  res.result;
+        let newRecord: RecordType = { ...data, id: newRes };
         transResult = newRecord;
         let result = store.put(transResult);
 
@@ -50,7 +50,9 @@ export class DataBase {
         }
 
         result.onerror = () => {
-          console.log('error: ', result.error);
+          console.log('error: ', result.error, res.result);
+          console.log(newRecord);
+          console.log(transResult);
         }
       }
     });

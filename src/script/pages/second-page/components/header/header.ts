@@ -80,13 +80,13 @@ export default class Header {
     this.registerButton.id = 'start-button';
 
 
-    window.addEventListener('click', () => {
+   /*  window.addEventListener('click', () => {
       if (String(localStorage.getItem('start')) === 'true') {
         this.startButton = customButton('Settings', this.clickHandlerSettings.bind(this), styles['start-button']);
         this.startButton.innerText = 'start game';
         this.headerRight.replaceChild(this.startButton, this.registerButton);
       }
-    });
+    }); */
     this.profile = createDomNode(this.profile, 'div', styles['profile']);
 
     this.headerLeft.append(this.logo, this.nav);
