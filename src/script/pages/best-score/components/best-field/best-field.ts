@@ -56,7 +56,7 @@ export class BestField {
       console.log(topScore, filteredLength);
 
       if (filteredLength == 1) {
-        index = 1;
+        index = 0;
       } else {
         index = filteredLength - 1;
       }
