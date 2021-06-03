@@ -77,6 +77,7 @@ export class WinWindow {
         lastName: localStorage.getItem('surname'),
         email: localStorage.getItem('email'),
         score: this.score,
+        avatar: localStorage.getItem('avatar'),
       }
 
       this.iDB.write('scoreCollection', user);

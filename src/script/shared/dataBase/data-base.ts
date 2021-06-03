@@ -13,6 +13,7 @@ export class DataBase {
       store.createIndex('lastName', 'lastName');
       store.createIndex('email', 'email', {unique: true});
       store.createIndex('score', 'score');
+      store.createIndex('avatar', 'avatar');
     }
 
     openRequest.onerror = () => {

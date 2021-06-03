@@ -1,8 +1,9 @@
 import { createDomNode, addStyles } from '../../../../common';
 import styles from './register-form.scss';
 import { DataBase } from '@/shared/dataBase';
-import { MyRecord } from '@/shared/My-record';
-import { removeStyles } from '@/common/common';
+import { Header } from '@/components';
+import SecondPage from '../..';
+import { start } from 'repl';
 
 export default class RegisterForm {
   registerFormContainer: HTMLElement;
@@ -21,6 +22,7 @@ export default class RegisterForm {
   inputName: HTMLElement;
   inputSurname: HTMLElement;
   inputEmail: HTMLElement;
+  inputAvatar: HTMLElement;
   avatar: HTMLElement;
   buttonAdd: HTMLElement;
   buttonCancel: HTMLElement;
@@ -28,6 +30,8 @@ export default class RegisterForm {
   emailValid: boolean = false;
 
   closeCross: HTMLElement;
+
+  secondPage: SecondPage;
 
   idB: DataBase;
 
@@ -119,14 +123,37 @@ export default class RegisterForm {
       }
     });
 
+    this.inputAvatar = createDomNode(this.inputAvatar, 'input', styles['input-avatar']);
+    this.inputAvatar.id = 'input-avatar';
+    this.inputAvatar.setAttribute('name', 'upload');
+    this.inputAvatar.setAttribute('type', 'file');
+
     this.avatar = createDomNode(this.avatar, 'img', styles['avatar']);
     this.avatar.setAttribute('src', '/images/avatar-reg.jpg');
+
+    let loadImage = this.inputAvatar as HTMLInputElement;
+    let editingImage = this.avatar as HTMLImageElement
+
+    function uploadImage() {
+      const file = loadImage.files[0];
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = function() {
+        editingImage.src = reader.result.toString();
+        localStorage.setItem('avatar', editingImage.src);
+      }
+
+      loadImage.value = null;
+    }
+
+    this.inputAvatar.addEventListener('change', uploadImage);
 
     this.buttonField = createDomNode(this.buttonField, 'div', styles['button-field']);
     this.buttonAdd = createDomNode(this.buttonAdd, 'button', styles['button-add']);
     this.buttonAdd.setAttribute('type', 'submit');
     this.buttonAdd.setAttribute('disabled', '');
     this.buttonAdd.innerText = 'add user';
+    this.buttonAdd.id = 'add-button';
     const validate = () => {
       if (nameInput.validity.valid && surnameInput.validity.valid && this.emailValid === true) {
         this.buttonAdd.removeAttribute('disabled');
@@ -146,20 +173,19 @@ export default class RegisterForm {
 
     const startButton = document.getElementById('start-button');
 
-    //
-    /* this.buttonAdd.addEventListener('click', () => {
-      event?.preventDefault();
-      console.log('send to db');
-      this.sendRegisterForm();
-      localStorage.setItem('firstName', nameInput.value);
-      localStorage.setItem('lastName', surnameInput.value);
-      localStorage.setItem('email', emailInput.value);
-    }); */
-
-
-
-    //
     this.buttonAdd.addEventListener('click', async () => {
+
+      const newImage = document.getElementById('avatar');
+      const startButton = document.getElementById('start-button');
+
+      newImage.setAttribute('src', editingImage.src);
+      newImage.style.opacity = '100';
+
+      /* startButton.innerText = 'start game';
+      startButton.onclick = () => {
+
+      } */
+
       event?.preventDefault();
       console.log('send to db');
       this.sendRegisterForm();
@@ -168,19 +194,8 @@ export default class RegisterForm {
       localStorage.setItem('surname', surnameInput.value);
       localStorage.setItem('email', emailInput.value);
 
-     /*  let user = {
-        firstName: nameInput.value,
-        lastName: surnameInput.value,
-        email: emailInput.value,
-        score: 0,
-      }
-
-     let newRec = await this.idB.write<MyRecord>('scoreCollection', user);
-     console.log(newRec); */
-
       localStorage.setItem('start', 'true');
 
-      //this.clearRegisterForm();
     });
     //
 
@@ -188,7 +203,6 @@ export default class RegisterForm {
 
     this.buttonCancel.addEventListener('click', () => {
       event?.preventDefault();
-      //this.hideRegisterForm();
       this.clearRegisterForm();
     });
 
@@ -196,7 +210,7 @@ export default class RegisterForm {
     this.buttonField.append(this.buttonAdd, this.buttonCancel);
 
     this.formFields.append(this.formItemName, this.formItemSurname, this.formItemEmail);
-    this.avatarField.append(this.avatar);
+    this.avatarField.append(this.avatar, this.inputAvatar);
     this.registerFormWrapper.append(this.formFields, this.avatarField, this.buttonField);
 
     this.cover = createDomNode(this.cover, 'div', styles['cover']);

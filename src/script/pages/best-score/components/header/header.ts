@@ -27,7 +27,8 @@ export default class Header {
 
   private routing: () => void;
 
-  constructor() {
+  getHeader(routing: () => void): HTMLElement {
+    this.routing = routing;
     this.header = createDomNode(this.header, 'header', styles['header']);
     this.headerContainer = createDomNode(this.headerContainer, 'div', styles['header-container']);
     this.header.append(this.headerContainer);
@@ -68,15 +69,19 @@ export default class Header {
     this.startButton = customButton('Settings', this.clickHandlerStart.bind(this), styles['start-button']);
     this.startButton.innerText = 'start game';
 
-    this.profile = createDomNode(this.profile, 'div', styles['profile']);
-
     this.headerLeft.append(this.logo, this.nav);
-    this.headerRight.append(this.startButton, this.profile);
+    this.headerRight.append(this.startButton);
     this.headerContainer.append(this.headerLeft, this.headerRight);
-  }
 
-  getHeader(routing: () => void): HTMLElement {
-    this.routing = routing;
+   if (localStorage.getItem('avatar')) {
+      console.log('true');
+      this.profile = createDomNode(this.profile, 'img', styles['profile']);
+      const imageItem = String(localStorage.getItem('avatar'));
+      this.profile.setAttribute('src', imageItem);
+      this.headerRight.append(this.profile);
+      return this.header;
+    }
+
     return this.header;
   }
 

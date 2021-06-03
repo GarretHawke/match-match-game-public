@@ -4,4 +4,5 @@ export interface MyRecord {
   email: string;
   score: number;
   id?: IDBValidKey;
+  avatar: string;
 }

@@ -76,10 +76,11 @@ export class BestField {
               style="display: flex;
               justify-content: space-between;
               align-items: center;">
-              <img class="score-image" src="/images/avatar.jpg"
+              <img class="score-image" src="${filtered[i].avatar}"
                 style="height: 30px;
                 width: 30px;
-                border-radius: 50%;">
+                border-radius: 50%;
+                object-fit: cover;">
               <div class="data-container"
                 style="height: 100%;
                 margin-left: 20px;

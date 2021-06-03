@@ -65,17 +65,22 @@ export default class Header {
     this.navSettings.append(this.iconSettings, this.navTextSettings);
     this.nav.append(this.navAbout, this.navScore, this.navSettings);
 
-
-    //this.startButton = new StartButton();
     this.startButton = customButton('Stop', this.clickHandlerStart.bind(this), styles['start-button']);
     this.startButton.id = 'stop-button';
     this.startButton.innerText = 'stop game';
 
-    this.profile = createDomNode(this.profile, 'div', styles['profile']);
-
     this.headerLeft.append(this.logo, this.nav);
-    this.headerRight.append(this.startButton, this.profile);
+    this.headerRight.append(this.startButton);
     this.headerContainer.append(this.headerLeft, this.headerRight);
+
+    if (localStorage.getItem('avatar')) {
+      console.log('true');
+      this.profile = createDomNode(this.profile, 'img', styles['profile']);
+      const imageItem = String(localStorage.getItem('avatar'));
+      this.profile.setAttribute('src', imageItem);
+      this.headerRight.append(this.profile);
+      return this.header;
+    }
 
     return this.header;
   }

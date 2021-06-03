@@ -23,6 +23,9 @@ export default class SecondPage {
   }
 
   initPage(root: HTMLElement, routing: () => void): void {
+
+
+
     this.routing = routing;
     const rootDiv = root;
     rootDiv.innerHTML = '';

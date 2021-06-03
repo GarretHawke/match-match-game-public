@@ -34,8 +34,10 @@ export default class Header {
 
   private routing: () => void;
 
-  constructor() {
-    localStorage.clear();
+  getHeader(routing: () => void): HTMLElement {
+    this.routing = routing;
+
+    //localStorage.clear();
 
     this.registerForm = new RegisterForm();
     this.header = createDomNode(this.header, 'header', styles['header']);
@@ -80,22 +82,20 @@ export default class Header {
     this.registerButton.id = 'start-button';
 
 
-   /*  window.addEventListener('click', () => {
-      if (String(localStorage.getItem('start')) === 'true') {
-        this.startButton = customButton('Settings', this.clickHandlerSettings.bind(this), styles['start-button']);
-        this.startButton.innerText = 'start game';
-        this.headerRight.replaceChild(this.startButton, this.registerButton);
-      }
-    }); */
-    this.profile = createDomNode(this.profile, 'div', styles['profile']);
-
     this.headerLeft.append(this.logo, this.nav);
-    this.headerRight.append(this.registerButton, this.profile);
+    this.headerRight.append(this.registerButton);
     this.headerContainer.append(this.headerLeft, this.headerRight);
-  }
 
-  getHeader(routing: () => void): HTMLElement {
-    this.routing = routing;
+    this.profile = createDomNode(this.profile, 'img', styles['profile']);
+    this.profile.style.opacity = '0';
+    this.profile.id = 'avatar';
+    const imageItem = String(localStorage.getItem('avatar'));
+    this.profile.setAttribute('src', imageItem);
+    this.headerRight.append(this.profile);
+
+    if (localStorage.getItem('avatar')) {
+      this.profile.style.opacity = '100';
+    }
 
     return this.header;
   }
