@@ -1,29 +1,46 @@
-import { createDomNode } from '../../../../common';
+import { createDomNode } from '@/common';
+
 import styles from './about-field.scss';
 
-export class AboutField {
+export default class AboutField {
   aboutField: HTMLElement;
+
   header: HTMLElement;
+
   aboutContainer: HTMLElement;
+
   stepsContainerLeft: HTMLElement;
+
   stepsContainerRight: HTMLElement;
 
   stepOneContainer: HTMLElement;
+
   stepTwoContainer: HTMLElement;
+
   stepThreeContainer: HTMLElement;
+
   circleOne: HTMLElement;
+
   circleTwo: HTMLElement;
+
   circleThree: HTMLElement;
+
   stepOneText: HTMLElement;
+
   stepTwoText: HTMLElement;
+
   stepThreeText: HTMLElement;
 
   formContainer: HTMLElement;
+
   buttonContainer: HTMLElement;
+
   gameFieldContainer: HTMLElement;
 
   imageForm: HTMLElement;
+
   imageButton: HTMLElement;
+
   imageField: HTMLElement;
 
   getAboutField(): HTMLElement {
@@ -31,14 +48,33 @@ export class AboutField {
     this.header = createDomNode(this.header, 'h2', styles['about-header']);
     this.header.innerText = 'How to play?';
 
-
     this.aboutContainer = createDomNode(this.aboutContainer, 'div', styles['about-container']);
-    this.stepsContainerLeft = createDomNode(this.stepsContainerLeft, 'div', styles['steps-container-left']);
-    this.stepsContainerRight = createDomNode(this.stepsContainerRight, 'div', styles['steps-container-right']);
+    this.stepsContainerLeft = createDomNode(
+      this.stepsContainerLeft,
+      'div',
+      styles['steps-container-left'],
+    );
+    this.stepsContainerRight = createDomNode(
+      this.stepsContainerRight,
+      'div',
+      styles['steps-container-right'],
+    );
 
-    this.stepOneContainer = createDomNode(this.stepOneContainer, 'div', styles['step-container-one']);
-    this.stepTwoContainer = createDomNode(this.stepTwoContainer, 'div', styles['step-container-two']);
-    this.stepThreeContainer = createDomNode(this.stepThreeContainer, 'div', styles['step-container-three']);
+    this.stepOneContainer = createDomNode(
+      this.stepOneContainer,
+      'div',
+      styles['step-container-one'],
+    );
+    this.stepTwoContainer = createDomNode(
+      this.stepTwoContainer,
+      'div',
+      styles['step-container-two'],
+    );
+    this.stepThreeContainer = createDomNode(
+      this.stepThreeContainer,
+      'div',
+      styles['step-container-three'],
+    );
 
     this.circleOne = createDomNode(this.circleOne, 'div', styles['circle']);
     this.circleOne.innerText = '1';
@@ -55,7 +91,11 @@ export class AboutField {
     this.stepThreeText = createDomNode(this.stepThreeText, 'p', styles['step-text']);
     this.stepThreeText.innerText = 'Start you new game! Remember card positions and match it before times up.';
     this.stepThreeContainer.append(this.circleThree, this.stepThreeText);
-    this.stepsContainerLeft.append(this.stepOneContainer, this.stepTwoContainer, this.stepThreeContainer);
+    this.stepsContainerLeft.append(
+      this.stepOneContainer,
+      this.stepTwoContainer,
+      this.stepThreeContainer,
+    );
 
     this.formContainer = createDomNode(this.formContainer, 'div', styles['form-container']);
     this.imageForm = createDomNode(this.imageForm, 'img', styles['form-image']);
@@ -67,13 +107,21 @@ export class AboutField {
     this.imageButton.setAttribute('src', 'images/settings-button.jpg');
     this.imageButton.setAttribute('alt', 'settings');
     this.buttonContainer.append(this.imageButton);
-    this.gameFieldContainer = createDomNode(this.gameFieldContainer, 'div', styles['game-field-container']);
+    this.gameFieldContainer = createDomNode(
+      this.gameFieldContainer,
+      'div',
+      styles['game-field-container'],
+    );
     this.imageField = createDomNode(this.imageField, 'img', styles['field-image']);
     this.imageField.setAttribute('src', '/images/game-field.jpg');
     this.imageField.setAttribute('alt', 'game field');
     this.gameFieldContainer.append(this.imageField);
 
-    this.stepsContainerRight.append(this.formContainer, this.buttonContainer, this.gameFieldContainer);
+    this.stepsContainerRight.append(
+      this.formContainer,
+      this.buttonContainer,
+      this.gameFieldContainer,
+    );
 
     this.aboutContainer.append(this.stepsContainerLeft, this.stepsContainerRight);
     this.aboutField.append(this.header, this.aboutContainer);

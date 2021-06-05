@@ -1,24 +1,37 @@
-import { createDomNode } from "@/common";
+import { createDomNode } from '@/common';
+
 import styles from './settings-field.scss';
 
-export class SettingsField {
+export default class SettingsField {
   settingsField: HTMLElement;
+
   gameCardsHeader: HTMLElement;
+
   difficultyHeader: HTMLElement;
+
   gameCardsSelection: HTMLElement;
+
   gameCardOption: HTMLElement;
+
   gameCardAnimal: HTMLElement;
+
   gameCardCars: HTMLElement;
+
   gameCardProfessions: HTMLElement;
+
   difficultySelection: HTMLElement;
+
   difficultyOption: HTMLElement;
+
   easyDifficulty: HTMLElement;
+
   mediumDifficulty: HTMLElement;
 
   selectionTypeValue: string;
+
   selectionDifficultyValue: string;
 
-  constructor(){
+  constructor() {
     this.settingsField = createDomNode(this.settingsField, 'div', styles['settings-field']);
     this.gameCardsHeader = createDomNode(this.gameCardsHeader, 'h2', styles['header']);
     this.gameCardsHeader.innerText = 'Game cards';
@@ -54,13 +67,26 @@ export class SettingsField {
     this.mediumDifficulty.setAttribute('value', '1');
     this.mediumDifficulty.innerText = '6x6';
 
-    this.gameCardsSelection.append(this.gameCardOption, this.gameCardAnimal, this.gameCardCars, this.gameCardProfessions);
-    this.difficultySelection.append(this.difficultyOption, this.easyDifficulty, this.mediumDifficulty);
-    this.settingsField.append(this.gameCardsHeader, this.gameCardsSelection, this.difficultyHeader, this.difficultySelection);
+    this.gameCardsSelection.append(
+      this.gameCardOption,
+      this.gameCardAnimal,
+      this.gameCardCars,
+      this.gameCardProfessions,
+    );
+    this.difficultySelection.append(
+      this.difficultyOption,
+      this.easyDifficulty,
+      this.mediumDifficulty,
+    );
+    this.settingsField.append(
+      this.gameCardsHeader,
+      this.gameCardsSelection,
+      this.difficultyHeader,
+      this.difficultySelection,
+    );
   }
 
   getSettingsField(): HTMLElement {
-
     const selectionType = this.gameCardsSelection as HTMLSelectElement;
     this.gameCardsSelection.addEventListener('change', () => {
       this.selectionTypeValue = selectionType.options[selectionType.selectedIndex].value;
@@ -69,7 +95,9 @@ export class SettingsField {
 
     const selectionDifficulty = this.difficultySelection as HTMLSelectElement;
     this.difficultySelection.addEventListener('change', () => {
-      this.selectionDifficultyValue = selectionDifficulty.options[selectionDifficulty.selectedIndex].value;
+      this.selectionDifficultyValue = selectionDifficulty
+        .options[selectionDifficulty.selectedIndex]
+        .value;
       localStorage.setItem('game-difficulty', this.selectionDifficultyValue);
     });
 

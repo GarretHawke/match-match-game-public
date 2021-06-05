@@ -1,13 +1,18 @@
-import { MainPage, SecondPage, SettingsPage, BestScorePage } from '@/pages';
+import {
+  GamePage, SecondPage, SettingsPage, BestScorePage,
+} from '@/pages';
 
 export default class App {
-  mainPage: MainPage;
+  gamePage: GamePage;
+
   secondPage: SecondPage;
+
   bestScorePage: BestScorePage;
+
   settingsPage: SettingsPage;
 
   constructor() {
-    this.mainPage = new MainPage();
+    this.gamePage = new GamePage();
     this.secondPage = new SecondPage();
     this.bestScorePage = new BestScorePage();
     this.settingsPage = new SettingsPage();
@@ -31,7 +36,7 @@ export default class App {
           this.settingsPage.initPage(rootDiv, this.routing.bind(this));
           break;
         case 'game':
-          this.mainPage.initPage(rootDiv, this.routing.bind(this));
+          this.gamePage.initPage(rootDiv, this.routing.bind(this));
           break;
         default: {
           this.secondPage.initPage(rootDiv, this.routing.bind(this));

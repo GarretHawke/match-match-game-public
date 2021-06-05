@@ -1,37 +1,54 @@
-import { createDomNode, addStyles } from '../../../../common';
+import { createDomNode, addStyles } from '@/common';
+import DataBase from '@/shared/dataBase';
+
 import styles from './register-form.scss';
-import { DataBase } from '@/shared/dataBase';
-import { Header } from '@/components';
-import SecondPage from '../..';
-import { start } from 'repl';
 
 export default class RegisterForm {
   registerFormContainer: HTMLElement;
+
   registerForm: HTMLElement;
+
   registerFormWrapper: HTMLElement;
+
   formHeader: HTMLElement;
+
   formFields: HTMLElement;
+
   avatarField: HTMLElement;
+
   buttonField: HTMLElement;
+
   formItemName: HTMLElement;
+
   formItemSurname: HTMLElement;
+
   formItemEmail: HTMLElement;
+
   labelName: HTMLElement;
+
   labelSurname: HTMLElement;
+
   labelEmail: HTMLElement;
+
   inputName: HTMLElement;
+
   inputSurname: HTMLElement;
+
   inputEmail: HTMLElement;
+
   inputAvatar: HTMLElement;
+
   avatar: HTMLElement;
+
   buttonAdd: HTMLElement;
+
   buttonCancel: HTMLElement;
+
   cover: HTMLElement;
-  emailValid: boolean = false;
+
+  emailValid = false;
 
   closeCross: HTMLElement;
-
-  secondPage: SecondPage;
 
   idB: DataBase;
 
@@ -39,7 +56,11 @@ export default class RegisterForm {
     this.idB = new DataBase();
     this.idB.init('garrethawke');
 
-    this.registerFormContainer = createDomNode(this.registerFormContainer, 'div', styles['register-form-container']);
+    this.registerFormContainer = createDomNode(
+      this.registerFormContainer,
+      'div',
+      styles['register-form-container'],
+    );
 
     this.registerForm = createDomNode(this.registerForm, 'div', styles['register-form']);
     this.closeCross = createDomNode(this.closeCross, 'div', styles['close-cross']);
@@ -95,13 +116,13 @@ export default class RegisterForm {
     this.inputEmail.classList.add('invalid');
     addStyles(this.inputEmail, styles['invalid']);
 
-    const FirstPartOfRegExp =
-      /^(([^<>()\\[\]\\.,;:\s@"]+(\.[^<>()\\[\]\\.,;:\s@"]+)*)|(".+"))/;
-    const SecondPartOfRegExp =
-      /@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    const regex = new RegExp(
-      `${FirstPartOfRegExp.source}${SecondPartOfRegExp.source}`,
-    );
+    const FirstPartOfRegExp = /^(([^<>()\\[\]\\.,;:\s@"]+(\.[^<>()\\[\]\\.,;:\s@"]+)*)|(".+"))/;
+    const SecondPartOfRegExp = /@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    const regex = new RegExp(`${FirstPartOfRegExp.source}${SecondPartOfRegExp.source}`);
+
+    const nameInput = this.inputName as HTMLInputElement;
+    const surnameInput = this.inputSurname as HTMLInputElement;
+    const emailInput = this.inputEmail as HTMLInputElement;
 
     this.inputEmail.id = 'email-field';
     this.inputEmail.setAttribute('placeholder', 'johndoe@gmail.com');
@@ -114,7 +135,6 @@ export default class RegisterForm {
         this.inputEmail.style.backgroundColor = 'rgba(10, 207, 131, 0.1)';
         this.inputEmail.style.border = '1px solid green';
         this.inputEmail.style.backgroundImage = 'url(./icons/check.jpg)';
-
       } else {
         this.emailValid = false;
         this.inputEmail.style.backgroundColor = 'rgba(242, 78, 30, 0.1)';
@@ -131,17 +151,18 @@ export default class RegisterForm {
     this.avatar = createDomNode(this.avatar, 'img', styles['avatar']);
     this.avatar.setAttribute('src', '/images/avatar-reg.jpg');
 
-    let loadImage = this.inputAvatar as HTMLInputElement;
-    let editingImage = this.avatar as HTMLImageElement
+    const loadImage = this.inputAvatar as HTMLInputElement;
+    const editingImage = this.avatar as HTMLImageElement;
 
     function uploadImage() {
       const file = loadImage.files[0];
       const reader = new FileReader();
       reader.readAsDataURL(file);
-      reader.onload = function() {
+      reader.onload = () => {
         editingImage.src = reader.result.toString();
         localStorage.setItem('avatar', editingImage.src);
-      }
+        localStorage.setItem('start', 'true');
+      };
 
       loadImage.value = null;
     }
@@ -155,39 +176,24 @@ export default class RegisterForm {
     this.buttonAdd.innerText = 'add user';
     this.buttonAdd.id = 'add-button';
     const validate = () => {
-      if (nameInput.validity.valid && surnameInput.validity.valid && this.emailValid === true) {
+      if (nameInput.validity.valid && surnameInput.validity.valid && this.emailValid) {
         this.buttonAdd.removeAttribute('disabled');
       } else {
         this.buttonAdd.setAttribute('disabled', '');
       }
-    }
-
-    let nameInput = this.inputName as HTMLInputElement;
-    let surnameInput = this.inputSurname as HTMLInputElement;
-    let emailInput = this.inputEmail as HTMLInputElement;
+    };
 
     this.inputName.addEventListener('input', validate);
     this.inputSurname.addEventListener('input', validate);
     this.inputEmail.addEventListener('input', validate);
 
-
-    const startButton = document.getElementById('start-button');
-
-    this.buttonAdd.addEventListener('click', async () => {
-
+    this.buttonAdd.addEventListener('click', event => {
       const newImage = document.getElementById('avatar');
-      const startButton = document.getElementById('start-button');
 
       newImage.setAttribute('src', editingImage.src);
       newImage.style.opacity = '100';
 
-      /* startButton.innerText = 'start game';
-      startButton.onclick = () => {
-
-      } */
-
-      event?.preventDefault();
-      console.log('send to db');
+      event.preventDefault();
       this.sendRegisterForm();
 
       localStorage.setItem('name', nameInput.value);
@@ -195,13 +201,11 @@ export default class RegisterForm {
       localStorage.setItem('email', emailInput.value);
 
       localStorage.setItem('start', 'true');
-
     });
-    //
 
     this.buttonCancel = createDomNode(this.buttonCancel, 'button', styles['button-cancel']);
 
-    this.buttonCancel.addEventListener('click', () => {
+    this.buttonCancel.addEventListener('click', event => {
       event?.preventDefault();
       this.clearRegisterForm();
     });
@@ -228,8 +232,7 @@ export default class RegisterForm {
   sendRegisterForm(): void {
     const nameField = this.inputName as HTMLInputElement;
     const surnameField = this.inputSurname as HTMLInputElement;
-    const emailField = this.inputEmail as HTMLInputElement;
-    if (nameField.validity.valid && surnameField.validity.valid && this.emailValid === true) {
+    if (nameField.validity.valid && surnameField.validity.valid && this.emailValid) {
       this.registerFormContainer.style.display = 'none';
     }
   }
@@ -243,9 +246,9 @@ export default class RegisterForm {
   }
 
   clearRegisterForm(): void {
-    let nameInput = this.inputName as HTMLInputElement;
-    let surnameInput = this.inputSurname as HTMLInputElement;
-    let emailInput = this.inputEmail as HTMLInputElement;
+    const nameInput = this.inputName as HTMLInputElement;
+    const surnameInput = this.inputSurname as HTMLInputElement;
+    const emailInput = this.inputEmail as HTMLInputElement;
     nameInput.value = '';
     surnameInput.value = '';
     emailInput.value = '';

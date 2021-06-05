@@ -1,29 +1,47 @@
-import { changeUrl, createDomNode } from "@/common";
-import { customButton } from "@/components";
+import { changeUrl, createDomNode } from '@/common';
+import customButton from '@/components/button';
+
 import styles from './header.scss';
-import { StartButton } from '@/components/button/start-button';
 
 export default class Header {
   header: HTMLElement;
+
   headerContainer: HTMLElement;
+
   logo: HTMLElement;
+
   logoTop: HTMLElement;
+
   logoBottom: HTMLElement;
+
   nav: HTMLElement;
+
   navAbout: HTMLElement;
+
   navScore: HTMLElement;
+
   navSettings: HTMLElement;
+
   iconAbout: HTMLElement;
+
   iconScore: HTMLElement;
+
   iconSettings: HTMLElement;
+
   navTextAbout: HTMLElement;
+
   navTextScore: HTMLElement;
+
   navTextSettings: HTMLElement;
+
   profile: HTMLElement;
+
   registerForm: HTMLElement;
+
   startButton: HTMLElement;
 
   headerLeft: HTMLElement;
+
   headerRight: HTMLElement;
 
   private routing: () => void;
@@ -77,7 +95,6 @@ export default class Header {
     this.headerContainer.append(this.headerLeft, this.headerRight);
 
     if (localStorage.getItem('avatar')) {
-      console.log('true');
       this.profile = createDomNode(this.profile, 'img', styles['profile']);
       const imageItem = String(localStorage.getItem('avatar'));
       this.profile.setAttribute('src', imageItem);

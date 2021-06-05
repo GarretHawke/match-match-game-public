@@ -1,10 +1,14 @@
-import { createDomNode } from "@/common";
+import { createDomNode } from '@/common';
+
+import SettingsField from '../settings-field';
+
 import styles from './main.scss';
-import { SettingsField } from '../settings-field';
 
 export default class Main {
   main: HTMLElement;
+
   mainContainer: HTMLElement;
+
   settingsField: SettingsField;
 
   constructor() {

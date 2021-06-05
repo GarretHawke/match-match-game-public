@@ -1,10 +1,12 @@
-import { changeUrl, createDomNode } from '@/common';
-import Header from '../settings/components/header';
+import { createDomNode } from '@/common';
+
+import Header from './components/header';
+import Main from './components/main';
 import styles from './settings.scss';
-import Main  from './components/main';
 
 export default class SettingsPage {
   header: Header;
+
   main: Main;
 
   private routing: () => void;

@@ -1,3 +1,3 @@
-import SecondPage from '@/pages/second-page/second-page';
+import SecondPage from './second-page';
 
 export default SecondPage;

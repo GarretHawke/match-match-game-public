@@ -1,4 +1,4 @@
-export interface MyRecord {
+export default interface MyRecord {
   firstName: string;
   lastName: string;
   email: string;

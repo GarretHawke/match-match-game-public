@@ -1,34 +1,52 @@
 import { createDomNode } from '@/common';
-import { DataBase } from '@/shared/dataBase';
-import { MyRecord } from '@/shared/My-record';
+import MyRecord from '@/shared/My-record';
+import DataBase from '@/shared/dataBase';
+import delay from '@/shared/delay';
+
 import styles from './best-field.scss';
 
-export class BestField {
+export default class BestField {
   bestField: HTMLElement;
+
   header: HTMLElement;
+
   scoreContainer: HTMLElement;
+
   scoreItem: HTMLElement;
+
   personContainer: HTMLElement;
+
   scoreItemImage: HTMLElement;
+
   dataContainer: HTMLElement;
+
   dataName: HTMLElement;
+
   dataEmail: HTMLElement;
+
   scoreWrapper: HTMLElement;
+
   scoreText: HTMLElement;
+
   scoreNumber: HTMLElement;
+
   abs: HTMLElement;
 
   iDB: DataBase;
 
   firstName: string;
+
   lastName: string;
+
   email: string;
+
   score: number;
 
   name: string;
+
   mail: string;
 
-  constructor(){
+  constructor() {
     this.iDB = new DataBase();
     this.iDB.init('garrethawke');
 
@@ -39,29 +57,32 @@ export class BestField {
     this.scoreContainer = createDomNode(this.scoreContainer, 'div', styles['score-container']);
     this.scoreItem = createDomNode(this.scoreItem, 'div', styles['score-item']);
 
-    setTimeout(async () => {
+    const drawScore = async () => {
+      await delay(200);
 
-      let arr = await this.iDB.readAll<MyRecord>('scoreCollection');
-      let filtered = await this.iDB.readFiltered<MyRecord>('scoreCollection', 'score', (item) => item.score > 0);
+      const filtered = await this.iDB.readFiltered<MyRecord>(
+        'scoreCollection',
+        'score',
+        item => item.score >= 0,
+      );
 
       let newElement: HTMLElement;
       let topScore: number;
       let index: number;
-      let filteredLength = filtered.length;
+      const filteredLength = filtered.length;
       if (filteredLength <= 10) {
         topScore = 0;
       } else {
         topScore = filteredLength - 10;
       }
-      console.log(topScore, filteredLength);
 
-      if (filteredLength == 1) {
+      if (filteredLength === 1) {
         index = 0;
       } else {
         index = filteredLength - 1;
       }
 
-      for (let i = index; i >= topScore; i--) {
+      for (let i = index; i >= topScore; i -= 1) {
         newElement = document.createElement('div');
         newElement.innerHTML = `
           <div class="score-item"
@@ -117,9 +138,10 @@ export class BestField {
           `;
         this.scoreContainer.append(newElement);
       }
-    this.bestField.append(this.header, this.scoreContainer);
-    }, 200);
+      this.bestField.append(this.header, this.scoreContainer);
+    };
 
+    drawScore();
   }
 
   getBestField(): HTMLElement {

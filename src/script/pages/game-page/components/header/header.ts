@@ -36,8 +36,6 @@ export default class Header {
 
   profile: HTMLElement;
 
-  registerForm: HTMLElement;
-
   startButton: HTMLElement;
 
   headerLeft: HTMLElement;
@@ -64,13 +62,29 @@ export default class Header {
     this.logo.append(this.logoTop, this.logoBottom);
 
     this.nav = createDomNode(this.nav, 'nav', styles['navigation']);
-    this.navAbout = customButton('About', this.clickHandlerAbout.bind(this), styles['navigation__about']);
-    this.navScore = customButton('Score', this.clickHandlerScore.bind(this), styles['navigation__score']);
-    this.navSettings = customButton('Settings', this.clickHandlerSettings.bind(this), styles['navigation__settings']);
+    this.navAbout = customButton(
+      'About',
+      this.clickHandlerAbout.bind(this),
+      styles['navigation__about'],
+    );
+    this.navScore = customButton(
+      'Score',
+      this.clickHandlerScore.bind(this),
+      styles['navigation__score'],
+    );
+    this.navSettings = customButton(
+      'Settings',
+      this.clickHandlerSettings.bind(this),
+      styles['navigation__settings'],
+    );
 
     this.iconAbout = createDomNode(this.iconAbout, 'div', styles['navigation-icon__about']);
     this.iconScore = createDomNode(this.iconScore, 'div', styles['navigation-icon__score']);
-    this.iconSettings = createDomNode(this.iconSettings, 'div', styles['navigation-icon__settings']);
+    this.iconSettings = createDomNode(
+      this.iconSettings,
+      'div',
+      styles['navigation-icon__settings'],
+    );
 
     this.navTextAbout = createDomNode(this.navTextAbout, 'span', styles['navigation-text']);
     this.navTextScore = createDomNode(this.navTextScore, 'span', styles['navigation-text']);
@@ -85,8 +99,13 @@ export default class Header {
     this.navSettings.append(this.iconSettings, this.navTextSettings);
     this.nav.append(this.navAbout, this.navScore, this.navSettings);
 
-    this.startButton = customButton('Settings', this.clickHandlerStart.bind(this), styles['start-button']);
-    this.startButton.innerText = 'start game';
+    this.startButton = customButton(
+      'Stop',
+      this.clickHandlerStart.bind(this),
+      styles['start-button'],
+    );
+    this.startButton.id = 'stop-button';
+    this.startButton.innerText = 'stop game';
 
     this.headerLeft.append(this.logo, this.nav);
     this.headerRight.append(this.startButton);
@@ -116,7 +135,11 @@ export default class Header {
   }
 
   clickHandlerStart(): void {
-    this.navigate('/settings');
+    if (this.startButton.innerText === 'STOP GAME') {
+      this.startButton.innerText = 'RESUME GAME';
+    } else {
+      this.startButton.innerText = 'STOP GAME';
+    }
   }
 
   navigate(pathName: string): void {

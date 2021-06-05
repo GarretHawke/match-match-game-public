@@ -1,35 +1,51 @@
 import { createDomNode, changeUrl } from '@/common';
-import styles from './header.scss';
-import { StartButton } from '../../../second-page/components/button/start-button';
-import { start } from 'repl';
-import RegisterForm from '../register-form';
-import { revealForm } from '../open-form';
-import { removeStyles } from '@/common/common';
 import customButton from '@/components/button/button';
-import { DataBase } from '@/shared/dataBase';
+
+import RegisterForm from '../register-form';
+
+import styles from './header.scss';
 
 export default class Header {
   header: HTMLElement;
+
   headerContainer: HTMLElement;
+
   logo: HTMLElement;
+
   logoTop: HTMLElement;
+
   logoBottom: HTMLElement;
+
   nav: HTMLElement;
+
   navAbout: HTMLElement;
+
   navScore: HTMLElement;
+
   navSettings: HTMLElement;
+
   iconAbout: HTMLElement;
+
   iconScore: HTMLElement;
+
   iconSettings: HTMLElement;
+
   navTextAbout: HTMLElement;
+
   navTextScore: HTMLElement;
+
   navTextSettings: HTMLElement;
+
   profile: HTMLElement;
+
   registerForm: RegisterForm;
+
   startButton: HTMLElement;
+
   registerButton: HTMLElement;
 
   headerLeft: HTMLElement;
+
   headerRight: HTMLElement;
 
   private routing: () => void;
@@ -37,9 +53,6 @@ export default class Header {
   getHeader(routing: () => void): HTMLElement {
     this.routing = routing;
 
-    //localStorage.clear();
-
-    this.registerForm = new RegisterForm();
     this.header = createDomNode(this.header, 'header', styles['header']);
     this.headerContainer = createDomNode(this.headerContainer, 'div', styles['header-container']);
     this.header.append(this.headerContainer);
@@ -48,7 +61,6 @@ export default class Header {
     this.headerRight = createDomNode(this.headerRight, 'div', styles['header-right']);
 
     this.logo = createDomNode(this.logo, 'div', styles['logo']);
-
     this.logoTop = createDomNode(this.logoTop, 'div', styles['logo__top']);
     this.logoTop.innerHTML = 'MATCH';
     this.logoBottom = createDomNode(this.logoTop, 'div', styles['logo__bottom']);
@@ -56,13 +68,29 @@ export default class Header {
     this.logo.append(this.logoTop, this.logoBottom);
 
     this.nav = createDomNode(this.nav, 'nav', styles['navigation']);
-    this.navAbout = customButton('About', this.clickHandlerAbout.bind(this), styles['navigation__about']);
-    this.navScore = customButton('Score', this.clickHandlerScore.bind(this), styles['navigation__score']);
-    this.navSettings = customButton('Settings', this.clickHandlerSettings.bind(this), styles['navigation__settings']);
+    this.navAbout = customButton(
+      'About',
+      this.clickHandlerAbout.bind(this),
+      styles['navigation__about'],
+    );
+    this.navScore = customButton(
+      'Score',
+      this.clickHandlerScore.bind(this),
+      styles['navigation__score'],
+    );
+    this.navSettings = customButton(
+      'Settings',
+      this.clickHandlerSettings.bind(this),
+      styles['navigation__settings'],
+    );
 
     this.iconAbout = createDomNode(this.iconAbout, 'div', styles['navigation-icon__about']);
     this.iconScore = createDomNode(this.iconScore, 'div', styles['navigation-icon__score']);
-    this.iconSettings = createDomNode(this.iconSettings, 'div', styles['navigation-icon__settings']);
+    this.iconSettings = createDomNode(
+      this.iconSettings,
+      'div',
+      styles['navigation-icon__settings'],
+    );
 
     this.navTextAbout = createDomNode(this.navTextAbout, 'span', styles['navigation-text']);
     this.navTextScore = createDomNode(this.navTextScore, 'span', styles['navigation-text']);
@@ -77,10 +105,13 @@ export default class Header {
     this.navSettings.append(this.iconSettings, this.navTextSettings);
     this.nav.append(this.navAbout, this.navScore, this.navSettings);
 
-    this.registerButton = customButton('Register', this.clickHandlerRegister.bind(this), styles['start-button']);
+    this.registerButton = customButton(
+      'Register',
+      this.clickHandlerRegister.bind(this),
+      styles['start-button'],
+    );
     this.registerButton.innerText = 'register new player';
     this.registerButton.id = 'start-button';
-
 
     this.headerLeft.append(this.logo, this.nav);
     this.headerRight.append(this.registerButton);
@@ -101,7 +132,7 @@ export default class Header {
   }
 
   clickHandlerRegister(): void {
-
+    this.navigate('/');
   }
 
   clickHandlerAbout(): void {

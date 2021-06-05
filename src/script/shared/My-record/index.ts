@@ -1,3 +1,3 @@
-import { MyRecord } from './my-record';
+import MyRecord from './my-record';
 
-export { MyRecord };
+export default MyRecord;

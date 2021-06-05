@@ -1,17 +1,17 @@
 import { createDomNode } from '@/common';
 
-import styles from './best-score.scss';
 import Header from './components/header';
 import Main from './components/main';
+import styles from './game-page.scss';
 
-export default class BestScorePage {
+export default class GameGape {
   header: Header;
 
   main: Main;
 
   private routing: () => void;
 
-  public bestScorePage: HTMLElement;
+  public gamePage: HTMLElement;
 
   constructor() {
     this.header = new Header();
@@ -23,11 +23,10 @@ export default class BestScorePage {
     rootDiv.innerHTML = '';
     rootDiv.append(this.header.getHeader(routing));
 
-    this.bestScorePage = createDomNode(this.bestScorePage, 'div', styles['best-score-page']);
-
+    this.gamePage = createDomNode(this.gamePage, 'div', styles['game-page']);
     this.main = new Main();
-    this.bestScorePage.append(this.main.getMain());
+    this.gamePage.append(this.main.getMain());
 
-    rootDiv.append(this.bestScorePage);
+    rootDiv.append(this.gamePage);
   }
 }

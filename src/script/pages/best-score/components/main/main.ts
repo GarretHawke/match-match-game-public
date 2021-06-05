@@ -1,10 +1,14 @@
-import { createDomNode } from "@/common";
-import { BestField } from "../best-field";
+import { createDomNode } from '@/common';
+
+import BestField from '../best-field';
+
 import styles from './main.scss';
 
 export default class Main {
   main: HTMLElement;
+
   mainContainer: HTMLElement;
+
   bestField: BestField;
 
   constructor() {

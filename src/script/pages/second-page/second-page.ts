@@ -1,16 +1,15 @@
-import { createDomNode, changeUrl} from '@/common';
-import Header from '../second-page/components/header';
-import { customButton } from '@/components';
-import styles from '@/pages/second-page/second-page.scss';
-import Main from '../second-page/components/main';
+import { createDomNode } from '@/common';
+
+import Header from './components/header';
+import Main from './components/main';
 import RegisterForm from './components/register-form';
-import { StartButton } from '@/components/button/start-button';
-
-
+import styles from './second-page.scss';
 
 export default class SecondPage {
   header: Header;
+
   main: Main;
+
   registerForm: RegisterForm;
 
   private routing: () => void;
@@ -23,9 +22,6 @@ export default class SecondPage {
   }
 
   initPage(root: HTMLElement, routing: () => void): void {
-
-
-
     this.routing = routing;
     const rootDiv = root;
     rootDiv.innerHTML = '';
@@ -45,5 +41,3 @@ export default class SecondPage {
     rootDiv.append(this.secondPage);
   }
 }
-
-

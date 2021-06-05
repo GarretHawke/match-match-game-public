@@ -1,3 +1,3 @@
-import { SettingsField } from './settings-field';
+import SettingsField from './settings-field';
 
-export { SettingsField };
+export default SettingsField;

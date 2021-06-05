@@ -1,3 +1,3 @@
-import { BestField } from './best-field';
+import BestField from './best-field';
 
-export { BestField };
+export default BestField;

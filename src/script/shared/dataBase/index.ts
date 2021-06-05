@@ -1,4 +1,3 @@
-import { DataBase } from './data-base';
+import DataBase from './data-base';
 
-export { DataBase };
-
+export default DataBase;

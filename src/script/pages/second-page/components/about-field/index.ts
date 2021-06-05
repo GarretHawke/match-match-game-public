@@ -1,2 +1,3 @@
-import { AboutField } from './about-field';
-export { AboutField };
+import AboutField from './about-field';
+
+export default AboutField;

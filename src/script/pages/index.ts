@@ -1,6 +1,8 @@
-import MainPage from './main-page';
+import BestScorePage from './best-score';
+import GamePage from './game-page';
 import SecondPage from './second-page';
 import SettingsPage from './settings';
-import BestScorePage from './best-score';
 
-export { MainPage, SecondPage, SettingsPage, BestScorePage };
+export {
+  GamePage, SecondPage, SettingsPage, BestScorePage,
+};
